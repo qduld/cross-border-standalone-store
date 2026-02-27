@@ -1,0 +1,98 @@
+// Prisma schema for Craft Shop e-commerce
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  nameEn      String    @unique
+  slug        String    @unique
+  icon        String?   // emoji or icon name
+  order       Int       @default(0)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id            String        @id @default(cuid())
+  title         String
+  titleEn       String
+  slug          String        @unique
+  description   String?
+  descriptionEn String?
+  price         Float
+  currency      String        @default("USD")
+  images        String[]      // Array of image URLs
+  categoryId    String
+  category      Category      @relation(fields: [categoryId], references: [id])
+  variants      Json?         // { colors: [], sizes: [], styles: [] }
+  stock         Int           @default(0)
+  status        ProductStatus @default(DRAFT)
+  featured      Boolean       @default(false)
+  views         Int           @default(0)
+  orders        OrderItem[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model ProductStatus {
+  id    String  @id @default(cuid())
+  name  String  @unique
+  products Product[]
+}
+
+enum ProductStatus {
+  DRAFT
+  ACTIVE
+  INACTIVE
+}
+
+model Order {
+  id              String      @id @default(cuid())
+  orderNumber     String      @unique
+  customerName    String
+  customerEmail   String
+  customerPhone   String?
+  shippingAddress Json        // { name, line1, line2, city, state, zip, country }
+  items           OrderItem[]
+  subtotal        Float
+  shipping        Float       @default(0)
+  total           Float
+  currency        String      @default("USD")
+  status          OrderStatus @default(PENDING)
+  paymentId       String?     // Stripe payment intent ID
+  paymentMethod   String?
+  trackingNumber  String?
+  notes           String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float   // Price at time of purchase
+  variant   Json?   // Selected variant
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
