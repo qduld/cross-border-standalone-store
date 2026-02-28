@@ -34,13 +34,17 @@ export function ProductCard({ id, title, price, image, category }: ProductCardPr
           {/* Quick Actions Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
             <div className="flex gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-              <Button className="flex-1 bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors">
-                <ShoppingCart className="w-4 h-4 mr-2" />
-                加购
-              </Button>
-              <Button className="bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors px-4">
-                <Heart className="w-4 h-4" />
-              </Button>
+              <Link href={`/product/${id}`} className="flex-1">
+                <Button className="w-full bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors">
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  加购
+                </Button>
+              </Link>
+              <Link href={`/product/${id}`}>
+                <Button className="bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors px-4">
+                  <Heart className="w-4 h-4" />
+                </Button>
+              </Link>
             </div>
           </div>
 
