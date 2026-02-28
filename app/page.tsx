@@ -15,23 +15,23 @@ const featuredProducts = [
   },
   {
     id: "2",
-    title: "Pipa Style Hair Clip - Chinese Musical Instrument",
-    price: 35.00,
+    title: "Seashell Necklace - Coral Style",
+    price: 42.00,
     image: "/products/76992cd5-3fc0-4234-b49e-8cfa198a2c75.jpg",
-    category: "Chinese Style"
+    category: "Seashell"
   },
   {
-    id: "3",
+    id: "13",
     title: "Handknit Cute Doll - Panda",
     price: 42.00,
-    image: "/products/031029c0-f688-41a0-acab-b736967ba122.jpg",
+    image: "/products/c87bc927-beb7-48f1-bf6f-80087967bcde.jpg",
     category: "Handknit"
   },
   {
-    id: "4",
+    id: "10",
     title: "Red String Gold Lock - Good Luck Charm",
     price: 55.00,
-    image: "/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg",
+    image: "/products/674a97be-cd48-446e-b3b5-4adb4746e8bd.jpg",
     category: "Chinese Style"
   }
 ];
@@ -168,7 +168,7 @@ export default function Home() {
                   <div className="relative w-full max-w-lg">
                     <div className="grid grid-cols-2 gap-3 lg:gap-4">
                       {/* Product 1 - Seashell */}
-                      <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                      <Link href="/product/1" className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                         <div className="aspect-square overflow-hidden">
                           <img
                             src="/products/12d62135-8563-46a1-9e71-14f55e56b772.jpg"
@@ -179,10 +179,10 @@ export default function Home() {
                         <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
                           热销
                         </div>
-                      </div>
-                      
+                      </Link>
+
                       {/* Product 2 - Chinese Style */}
-                      <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 lg:mt-6">
+                      <Link href="/product/5" className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 lg:mt-6">
                         <div className="aspect-square overflow-hidden">
                           <img
                             src="/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg"
@@ -193,10 +193,10 @@ export default function Home() {
                         <div className="absolute top-2 right-2 bg-gradient-to-r from-red-600 to-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
                           精选
                         </div>
-                      </div>
-                      
+                      </Link>
+
                       {/* Product 3 - Handknit */}
-                      <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 -lg:mt-4">
+                      <Link href="/product/13" className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 -lg:mt-4">
                         <div className="aspect-square overflow-hidden">
                           <img
                             src="/products/c87bc927-beb7-48f1-bf6f-80087967bcde.jpg"
@@ -207,10 +207,10 @@ export default function Home() {
                         <div className="absolute top-2 right-2 bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
                           新品
                         </div>
-                      </div>
-                      
+                      </Link>
+
                       {/* Product 4 - Necklace */}
-                      <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 lg:mt-2">
+                      <Link href="/product/2" className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 lg:mt-2">
                         <div className="aspect-square overflow-hidden">
                           <img
                             src="/products/76992cd5-3fc0-4234-b49e-8cfa198a2c75.jpg"
@@ -218,7 +218,7 @@ export default function Home() {
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                           />
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   </div>
                 </div>
