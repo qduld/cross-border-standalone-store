@@ -266,9 +266,11 @@ export default function Home() {
                     </div>
                     {/* Quick Actions */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <Button className="bg-white text-red-700 hover:bg-red-50 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                        快速查看
-                      </Button>
+                      <Link href={`/product/${product.id}`}>
+                        <Button className="bg-white text-red-700 hover:bg-red-50 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                          快速查看
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                   <div className="p-6">
@@ -280,9 +282,16 @@ export default function Home() {
                       <p className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
                         ${product.price.toFixed(2)}
                       </p>
-                      <div className="flex items-center gap-1 text-yellow-500">
-                        <span>⭐</span>
-                        <span className="text-sm text-gray-600">4.9</span>
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1 text-yellow-500">
+                          <span>⭐</span>
+                          <span className="text-sm text-gray-600">4.9</span>
+                        </div>
+                        <Link href={`/product/${product.id}`}>
+                          <Button variant="outline" size="sm" className="rounded-full">
+                            查看详情
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>
