@@ -94,24 +94,24 @@ export default function AdminOrders() {
       case 'Processing': return <Clock className="h-4 w-4 text-blue-600" />
       case 'Shipped': return <Truck className="h-4 w-4 text-purple-600" />
       case 'Cancelled': return <XCircle className="h-4 w-4 text-red-600" />
-      default: return <Package className="h-4 w-4 text-gray-600" />
+      default: return <Package className="h-4 w-4 text-gray-600 dark:text-gray-400" />
     }
   }
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'Completed': return 'bg-green-100 text-green-700'
-      case 'Processing': return 'bg-blue-100 text-blue-700'
-      case 'Shipped': return 'bg-purple-100 text-purple-700'
-      case 'Cancelled': return 'bg-red-100 text-red-700'
-      default: return 'bg-yellow-100 text-yellow-700'
+      case 'Completed': return 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-400'
+      case 'Processing': return 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-400'
+      case 'Shipped': return 'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-400'
+      case 'Cancelled': return 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-400'
+      default: return 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-400'
     }
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Admin Header */}
-      <header className="bg-white border-b sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
@@ -121,7 +121,7 @@ export default function AdminOrders() {
                   Back to Dashboard
                 </Button>
               </Link>
-              <h1 className="text-xl font-bold text-gray-900">Orders</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Orders</h1>
             </div>
             <Button variant="outline">
               <ShoppingBag className="h-4 w-4 mr-2" />
@@ -168,19 +168,19 @@ export default function AdminOrders() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Order ID</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Customer</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Items</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Total</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Payment</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Status</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Date</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Actions</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Order ID</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Customer</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Items</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Total</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Payment</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Status</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Date</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {orders.map((order) => (
-                    <tr key={order.id} className="border-b hover:bg-gray-50">
+                    <tr key={order.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
                       <td className="py-3 px-4 font-medium">{order.id}</td>
                       <td className="py-3 px-4">
                         <div>
@@ -191,7 +191,7 @@ export default function AdminOrders() {
                       <td className="py-3 px-4">{order.items}</td>
                       <td className="py-3 px-4 font-medium">{order.total}</td>
                       <td className="py-3 px-4">
-                        <span className="text-sm text-gray-600">{order.payment}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-300">{order.payment}</span>
                       </td>
                       <td className="py-3 px-4">
                         <div className="flex items-center space-x-2">
@@ -201,7 +201,7 @@ export default function AdminOrders() {
                           </span>
                         </div>
                       </td>
-                      <td className="py-3 px-4 text-sm text-gray-600">{order.date}</td>
+                      <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-300">{order.date}</td>
                       <td className="py-3 px-4">
                         <Button variant="ghost" size="sm">
                           <Eye className="h-4 w-4" />

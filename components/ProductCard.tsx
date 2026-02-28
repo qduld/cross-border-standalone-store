@@ -66,14 +66,14 @@ export function ProductCard({ id, title, price, image, category }: ProductCardPr
             <div className="flex gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
               <Button
                 onClick={handleAddToCart}
-                className="flex-1 bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors"
+                className="flex-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-red-700 hover:text-white transition-colors"
               >
                 <ShoppingCart className="w-4 h-4 mr-2" />
                 {t("加购", "Add to Cart")}
               </Button>
               <Button
                 onClick={handleLike}
-                className={`bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors px-4 ${isLiked ? 'text-red-500 hover:text-white' : ''}`}
+                className={`bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-red-700 hover:text-white transition-colors px-4 ${isLiked ? 'text-red-500 hover:text-white' : ''}`}
               >
                 <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
               </Button>

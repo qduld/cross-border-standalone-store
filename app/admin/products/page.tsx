@@ -43,9 +43,9 @@ export default function AdminProducts() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Admin Header */}
-      <header className="bg-white border-b sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
@@ -55,7 +55,7 @@ export default function AdminProducts() {
                   Back to Dashboard
                 </Button>
               </Link>
-              <h1 className="text-xl font-bold text-gray-900">Products</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-white">Products</h1>
             </div>
             <Link href="/admin/products/new">
               <Button style={{ backgroundColor: '#C8161D', color: 'white' }}>
@@ -104,17 +104,17 @@ export default function AdminProducts() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Product</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Price</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Stock</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Category</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Status</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Actions</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Product</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Price</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Stock</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Category</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Status</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
-                    <tr key={product.id} className="border-b hover:bg-gray-50">
+                    <tr key={product.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
                       <td className="py-3 px-4">
                         <div className="flex items-center space-x-3">
                           <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">

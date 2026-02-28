@@ -39,9 +39,9 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Admin Header */}
-      <header className="bg-white border-b sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
@@ -62,7 +62,7 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-300">
                 Total Revenue
               </CardTitle>
               <DollarSign className="h-4 w-4 text-green-600" />
@@ -78,7 +78,7 @@ export default function AdminDashboard() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-300">
                 Total Orders
               </CardTitle>
               <ShoppingBag className="h-4 w-4 text-blue-600" />
@@ -94,14 +94,14 @@ export default function AdminDashboard() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-300">
                 Total Products
               </CardTitle>
               <Package className="h-4 w-4 text-purple-600" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">16</div>
-              <p className="text-xs text-gray-600 mt-1">
+              <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">
                 3 active, 0 out of stock
               </p>
             </CardContent>
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">
+              <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-300">
                 Customers
               </CardTitle>
               <Users className="h-4 w-4 text-orange-600" />
@@ -175,11 +175,11 @@ export default function AdminDashboard() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Order ID</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Customer</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Total</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Status</th>
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">Date</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Order ID</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Customer</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Total</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Status</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-600 dark:text-gray-300">Date</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -190,7 +190,7 @@ export default function AdminDashboard() {
                     { id: "ORD-004", customer: "Alice Brown", total: "$28.00", status: "Shipped", date: "2026-02-25" },
                     { id: "ORD-005", customer: "Charlie Wilson", total: "$95.00", status: "Completed", date: "2026-02-24" },
                   ].map((order) => (
-                    <tr key={order.id} className="border-b hover:bg-gray-50">
+                    <tr key={order.id} className="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
                       <td className="py-3 px-4 text-sm font-medium">{order.id}</td>
                       <td className="py-3 px-4 text-sm">{order.customer}</td>
                       <td className="py-3 px-4 text-sm font-medium">{order.total}</td>
@@ -204,7 +204,7 @@ export default function AdminDashboard() {
                           {order.status}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-sm text-gray-600">{order.date}</td>
+                      <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-300">{order.date}</td>
                     </tr>
                   ))}
                 </tbody>

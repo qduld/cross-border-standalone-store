@@ -138,7 +138,7 @@ export default function CategoryPage() {
                     </div>
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                      <Button className="bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors">
+                      <Button className="bg-white dark:bg-gray-700 text-gray-900 dark:text-white hover:bg-red-700 hover:text-white transition-colors">
                         {t("查看详情", "View Details")}
                       </Button>
                     </div>

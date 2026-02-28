@@ -31,7 +31,7 @@ export default function ContactPage() {
             <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto">
               Contact Us
             </p>
-            <div className="w-24 h-1 bg-white mx-auto mt-8 rounded-full"></div>
+            <div className="w-24 h-1 bg-white dark:bg-gray-600 mx-auto mt-8 rounded-full"></div>
           </div>
         </div>
       </section>
