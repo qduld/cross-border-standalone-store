@@ -33,7 +33,23 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
 }
 
-/* Dark mode class - takes priority over everything */
+/* Dark mode - class strategy for Tailwind v4 */
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-background: 0 0% 100%;
+  --color-foreground: 222.2 84% 4.9%;
+  --color-card: 0 0% 100%;
+  --color-card-foreground: 222.2 84% 4.9%;
+  --color-popover: 0 0% 100%;
+  --color-popover-foreground: 222.2 84% 4.9%;
+  --color-muted: 210 40% 96.1%;
+  --color-muted-foreground: 215.4 16.3% 46.9%;
+  --color-border: 214.3 31.8% 91.4%;
+  --color-input: 214.3 31.8% 91.4%;
+  --color-ring: 357 78% 43%;
+}
+
 .dark {
   --color-background: 222.2 84% 4.9%;
   --color-foreground: 210 40% 98%;
@@ -45,21 +61,6 @@ body {
   --color-muted-foreground: 215 20.2% 65.1%;
   --color-border: 217.2 32.6% 17.5%;
   --color-input: 217.2 32.6% 17.5%;
-  --color-ring: 357 78% 43%;
-}
-
-/* Light mode class - ensures light colors when dark class is removed */
-html:not(.dark) {
-  --color-background: 0 0% 100%;
-  --color-foreground: 222.2 84% 4.9%;
-  --color-card: 0 0% 100%;
-  --color-card-foreground: 222.2 84% 4.9%;
-  --color-popover: 0 0% 100%;
-  --color-popover-foreground: 222.2 84% 4.9%;
-  --color-muted: 210 40% 96.1%;
-  --color-muted-foreground: 215.4 16.3% 46.9%;
-  --color-border: 214.3 31.8% 91.4%;
-  --color-input: 214.3 31.8% 91.4%;
   --color-ring: 357 78% 43%;
 }
 
