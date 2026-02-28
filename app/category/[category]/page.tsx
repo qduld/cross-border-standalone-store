@@ -43,7 +43,7 @@ const categoryData: Record<string, {
       { id: "6", title: "Butterfly Hairpin - Gold", price: 38.00, image: "/products/c0ad822d-f16f-40b4-b4ae-7f7425b6de54.jpg" },
       { id: "7", title: "Palm Fan Hairpin - Green", price: 32.00, image: "/products/2178554d-62e5-4da6-befa-1ef7268ce8cb.jpg" },
       { id: "8", title: "Round Mirror - Traditional", price: 45.00, image: "/products/ab987880-1bc0-4d1a-b576-a6f4de430518.jpg" },
-      { id: "9", title: "Wu Shi Pao - Buddha Amulet", price: 55.00, image: "/products/47d8f059-0d5e-4c88-9eeb-435e066ad9ce.jpg" },
+      { id: "9", title: "Wu Shi Pao - Buddha Amulet", price: 55.00, image: "/products/47d8f059-0d8e-4c88-9eeb-435e066ad9ce.jpg" },
       { id: "10", title: "Red String Gold Lock", price: 55.00, image: "/products/674a97be-cd48-446e-b3b5-4adb4746e8bd.jpg" },
     ]
   },

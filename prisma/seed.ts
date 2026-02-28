@@ -207,7 +207,7 @@ async function main() {
       descriptionEn: 'Exquisite Wu Shi Pao with Buddha amulet inside metal frame. Symbolizes peace and safety.',
       price: 55.00,
       categoryId: chinese.id,
-      images: ['/products/47d8f059-0d5e-4c88-9eeb-435e066ad9ce.jpg'],
+      images: ['/products/47d8f059-0d8e-4c88-9eeb-435e066ad9ce.jpg'],
       stock: 8,
       status: ProductStatus.ACTIVE,
       featured: true,
