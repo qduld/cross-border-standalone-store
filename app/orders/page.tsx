@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import Link from "next/link"
 import { useLanguage } from "@/context/LanguageContext"
 
 export default function OrdersPage() {
