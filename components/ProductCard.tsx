@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
 
 interface ProductCardProps {
   id: string;
