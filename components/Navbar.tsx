@@ -15,21 +15,27 @@ export default function Navbar() {
           </Link>
 
           {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-red-700 transition">
+          <div className="hidden md:flex items-center space-x-6">
+            <Link href="/" className="text-gray-700 hover:text-red-700 transition font-medium">
               Home
             </Link>
-            <Link href="/products" className="text-gray-700 hover:text-red-700 transition">
-              All Products
+            <Link href="/products" className="text-gray-700 hover:text-red-700 transition font-medium">
+              Products
             </Link>
-            <Link href="/category/seashell" className="text-gray-700 hover:text-red-700 transition">
-              Seashell Jewelry
+            <Link href="/category/seashell" className="text-gray-700 hover:text-red-700 transition font-medium">
+              Seashell
             </Link>
-            <Link href="/category/chinese" className="text-gray-700 hover:text-red-700 transition">
-              Chinese Style
+            <Link href="/category/chinese" className="text-gray-700 hover:text-red-700 transition font-medium">
+              Chinese
             </Link>
-            <Link href="/category/handknit" className="text-gray-700 hover:text-red-700 transition">
+            <Link href="/category/handknit" className="text-gray-700 hover:text-red-700 transition font-medium">
               Handknit
+            </Link>
+            <Link href="/about" className="text-gray-700 hover:text-red-700 transition font-medium">
+              About
+            </Link>
+            <Link href="/contact" className="text-gray-700 hover:text-red-700 transition font-medium">
+              Contact
             </Link>
           </div>
 
@@ -41,7 +47,7 @@ export default function Navbar() {
             <Button variant="ghost" size="icon">
               <User className="h-5 w-5" />
             </Button>
-            <Link href="/checkout">
+            <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCart className="h-5 w-5" />
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">

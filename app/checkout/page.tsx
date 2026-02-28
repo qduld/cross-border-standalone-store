@@ -1,268 +1,288 @@
-"use client"
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle, Truck, Lock } from "lucide-react";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { 
-  ShoppingCart, 
-  CheckCircle, 
-  AlertCircle, 
-  Loader2,
-  ArrowLeft
-} from "lucide-react"
-import Link from "next/link"
+// Mock order data
+const orderData = {
+  items: [
+    {
+      id: "1",
+      title: "Seashell Hairpin - Ocean Waves",
+      price: 28.00,
+      quantity: 2,
+      image: "/products/12d62135-8563-46a1-9e71-14f55e56b772.jpg",
+    },
+    {
+      id: "5",
+      title: "Pipa Style Hair Clip - Red",
+      price: 35.00,
+      quantity: 1,
+      image: "/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg",
+    },
+  ],
+  subtotal: 91.00,
+  shipping: 0,
+  total: 91.00,
+};
 
 export default function CheckoutPage() {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    address: '',
-    city: '',
-    zip: '',
-    country: 'United States',
-  })
-
-  // Mock cart data
-  const cartItems = [
-    { id: "1", title: "Seashell Hairpin - Ocean Waves", price: 28.00, quantity: 1 },
-    { id: "5", title: "Pipa Style Hair Clip - Red", price: 35.00, quantity: 1 },
-  ]
-
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shipping = subtotal > 50 ? 0 : 5.00
-  const total = subtotal + shipping
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setLoading(true)
-
-    // Simulate payment processing
-    setTimeout(() => {
-      setLoading(false)
-      setSuccess(true)
-    }, 2000)
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-center gap-4">
-          <Link href="/">
-            <Button variant="ghost" size="sm">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Continue Shopping
-            </Button>
-          </Link>
-          <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
-              Checkout
-            </h1>
-            <p className="text-gray-600 mt-1">Complete your order</p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white">
+      <Navbar />
 
-        {success ? (
-          <Card className="bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
-            <CardContent className="py-16 text-center">
-              <CheckCircle className="h-20 w-20 text-green-600 mx-auto mb-6" />
-              <h2 className="text-3xl font-bold text-green-800 mb-4">
-                Order Placed Successfully!
-              </h2>
-              <p className="text-green-700 text-lg mb-8">
-                Thank you for your purchase. Your order is being processed.
-              </p>
-              <div className="bg-white rounded-lg p-6 max-w-md mx-auto mb-6 shadow-lg">
-                <div className="text-sm text-gray-600 mb-2">Order Number</div>
-                <div className="text-2xl font-bold text-gray-900">ORD-{Date.now().toString().slice(-6)}</div>
-              </div>
-              <Link href="/">
-                <Button variant="gradient" size="lg">
-                  Continue Shopping
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* Header */}
+      <section className="bg-gradient-to-r from-red-50 to-orange-50 py-12 border-b border-red-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
+            结账
+          </h1>
+          <p className="text-xl text-gray-600 mt-2">
+            Checkout
+          </p>
+        </div>
+      </section>
+
+      {/* Checkout Content */}
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             {/* Checkout Form */}
-            <div className="md:col-span-2 space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <ShoppingCart className="h-5 w-5 text-red-700" />
-                    Shipping Information
-                  </CardTitle>
-                  <CardDescription>
-                    Enter your shipping details
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="lg:col-span-2 space-y-6">
+              {/* Shipping Information */}
+              <Card className="border border-red-100">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 mb-6">
+                    <div className="w-8 h-8 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                      1
+                    </div>
+                    <h2 className="text-xl font-bold">配送信息</h2>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input 
-                        id="name" 
-                        placeholder="John Doe"
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        required
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        名字 First Name
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="请输入名字"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        type="email" 
-                        placeholder="john@example.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        required
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        姓氏 Last Name
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="请输入姓氏"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        邮箱 Email
+                      </label>
+                      <input
+                        type="email"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="请输入邮箱"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        电话 Phone
+                      </label>
+                      <input
+                        type="tel"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="请输入电话"
+                      />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        地址 Address
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="请输入地址"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="address">Address</Label>
-                      <Input 
-                        id="address" 
-                        placeholder="123 Main St"
-                        value={formData.address}
-                        onChange={(e) => setFormData({...formData, address: e.target.value})}
-                        required
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        城市 City
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="城市"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        邮编 Zip Code
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="邮编"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Payment Method */}
+              <Card className="border border-red-100">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-2 mb-6">
+                    <div className="w-8 h-8 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                      2
+                    </div>
+                    <h2 className="text-xl font-bold">支付方式</h2>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3 p-4 border-2 border-red-500 rounded-xl bg-red-50">
+                      <input type="radio" name="payment" checked className="w-5 h-5 text-red-600" />
+                      <div className="flex-1">
+                        <div className="font-semibold">信用卡 Credit Card</div>
+                        <div className="text-sm text-gray-600">Visa, Mastercard, American Express</div>
+                      </div>
+                      <div className="text-2xl">💳</div>
+                    </div>
+
+                    <div className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-xl hover:border-red-500 transition-colors">
+                      <input type="radio" name="payment" className="w-5 h-5 text-red-600" />
+                      <div className="flex-1">
+                        <div className="font-semibold">PayPal</div>
+                        <div className="text-sm text-gray-600">Safe and secure payment</div>
+                      </div>
+                      <div className="text-2xl">🅿️</div>
+                    </div>
+                  </div>
+
+                  {/* Card Details */}
+                  <div className="mt-6 space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        卡号 Card Number
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                        placeholder="0000 0000 0000 0000"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="city">City</Label>
-                        <Input 
-                          id="city" 
-                          placeholder="New York"
-                          value={formData.city}
-                          onChange={(e) => setFormData({...formData, city: e.target.value})}
-                          required
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          过期日期 Expiry
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                          placeholder="MM/YY"
                         />
                       </div>
                       <div>
-                        <Label htmlFor="zip">ZIP Code</Label>
-                        <Input 
-                          id="zip" 
-                          placeholder="10001"
-                          value={formData.zip}
-                          onChange={(e) => setFormData({...formData, zip: e.target.value})}
-                          required
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          CVV
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all"
+                          placeholder="123"
                         />
                       </div>
                     </div>
-
-                    {error && (
-                      <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded flex items-start gap-2">
-                        <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                        <p className="text-sm">{error}</p>
-                      </div>
-                    )}
-
-                    <Button 
-                      type="submit" 
-                      variant="gradient" 
-                      className="w-full"
-                      disabled={loading}
-                    >
-                      {loading ? (
-                        <>
-                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                          Processing Order...
-                        </>
-                      ) : (
-                        <>
-                          Place Order - ${total.toFixed(2)}
-                        </>
-                      )}
-                    </Button>
-
-                    <div className="text-center text-sm text-gray-500 mt-4">
-                      Demo mode - No actual payment required
-                    </div>
-                  </form>
-                </CardContent>
-              </Card>
-
-              {/* Payment Method (Demo) */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Payment Method</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 p-4 border-2 border-red-500 bg-red-50 rounded-lg">
-                      <div className="w-6 h-6 rounded-full bg-red-700 flex items-center justify-center">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                      </div>
-                      <span className="font-medium">Demo Payment (No card required)</span>
-                    </div>
                   </div>
-                  <p className="text-sm text-gray-500 mt-4">
-                    In production, this will integrate with Stripe for real payments.
-                  </p>
                 </CardContent>
               </Card>
             </div>
 
             {/* Order Summary */}
-            <div>
-              <Card className="sticky top-20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <ShoppingCart className="h-5 w-5 text-red-700" />
-                    Order Summary
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {cartItems.map((item) => (
-                      <div key={item.id} className="flex justify-between text-sm">
-                        <div>
-                          <div className="font-medium">{item.title}</div>
-                          <div className="text-gray-500">Qty: {item.quantity}</div>
+            <div className="lg:col-span-1">
+              <Card className="sticky top-24 border border-red-100">
+                <CardContent className="p-6 space-y-6">
+                  <h2 className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
+                    订单摘要
+                  </h2>
+
+                  {/* Order Items */}
+                  <div className="space-y-3 max-h-64 overflow-y-auto">
+                    {orderData.items.map((item) => (
+                      <div key={item.id} className="flex gap-3">
+                        <div className="w-16 h-16 flex-shrink-0">
+                          <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg overflow-hidden">
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
                         </div>
-                        <div className="font-bold">${(item.price * item.quantity).toFixed(2)}</div>
+                        <div className="flex-1">
+                          <p className="font-medium text-sm line-clamp-2">{item.title}</p>
+                          <p className="text-xs text-gray-600">数量: {item.quantity}</p>
+                          <p className="text-sm font-semibold text-red-700">
+                            ${(item.price * item.quantity).toFixed(2)}
+                          </p>
+                        </div>
                       </div>
                     ))}
-                    
-                    <div className="border-t pt-4 space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Subtotal</span>
-                        <span>${subtotal.toFixed(2)}</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Shipping</span>
-                        <span>{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
-                      </div>
-                      <div className="flex justify-between font-bold text-lg pt-2 border-t">
-                        <span>Total</span>
-                        <span className="bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
-                          ${total.toFixed(2)}
+                  </div>
+
+                  <div className="border-t pt-4 space-y-3">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">小计 Subtotal</span>
+                      <span className="font-semibold">${orderData.subtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">运费 Shipping</span>
+                      <span className="font-semibold text-green-600">免费 FREE</span>
+                    </div>
+                    <div className="border-t pt-3">
+                      <div className="flex justify-between">
+                        <span className="text-lg font-bold">总计 Total</span>
+                        <span className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
+                          ${orderData.total.toFixed(2)}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  {shipping > 0 && (
-                    <div className="mt-6 p-4 bg-orange-50 rounded-lg border border-orange-200">
-                      <p className="text-sm text-orange-700">
-                        💡 Add ${(50 - subtotal).toFixed(2)} more to get FREE shipping!
-                      </p>
+                  <Button size="lg" variant="gradient" className="w-full text-lg py-4">
+                    <Lock className="mr-2 w-5 h-5" />
+                    安全支付 Pay Now
+                  </Button>
+
+                  <div className="flex items-center justify-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-600" />
+                      <span>安全支付</span>
                     </div>
-                  )}
+                    <div className="flex items-center gap-1">
+                      <Truck className="w-4 h-4 text-blue-600" />
+                      <span>全球配送</span>
+                    </div>
+                  </div>
+
+                  <div className="text-center text-xs text-gray-500">
+                    <p>🔒 SSL加密保护您的信息</p>
+                    <p>✅ 30天退换保证</p>
+                  </div>
                 </CardContent>
               </Card>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
-  )
+  );
 }
