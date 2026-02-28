@@ -14,24 +14,31 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light")
-  const [isLoaded, setIsLoaded] = useState(false)
 
-  // Load theme from localStorage on mount
+  // Load and apply theme on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as Theme | null
-    if (savedTheme) {
-      setTheme(savedTheme)
+    const initialTheme = savedTheme || "light"
+    setTheme(initialTheme)
+
+    // Apply theme to document immediately
+    if (initialTheme === "dark") {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
     }
-    setIsLoaded(true)
   }, [])
 
   // Save theme to localStorage and update document whenever it changes
   useEffect(() => {
-    if (isLoaded) {
-      localStorage.setItem("theme", theme)
-      document.documentElement.classList.toggle("dark", theme === "dark")
+    localStorage.setItem("theme", theme)
+
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark")
+    } else {
+      document.documentElement.classList.remove("dark")
     }
-  }, [theme, isLoaded])
+  }, [theme])
 
   const toggleTheme = () => {
     setTheme(prev => prev === "light" ? "dark" : "light")
