@@ -25,7 +25,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b dark:border-gray-800">
+      <nav className={`sticky top-0 z-50 border-b ${theme === 'dark' ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -37,25 +37,25 @@ export default function Navbar() {
 
             {/* Navigation Links - Desktop */}
             <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+              <Link href="/" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("首页", "Home")}
               </Link>
-              <Link href="/products" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+              <Link href="/products" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("产品", "Products")}
               </Link>
-              <Link href="/category/seashell" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+              <Link href="/category/seashell" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("贝壳", "Seashell")}
               </Link>
-              <Link href="/category/chinese" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+              <Link href="/category/chinese" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("中国风", "Chinese")}
               </Link>
-              <Link href="/category/handknit" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+              <Link href="/category/handknit" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("手工", "Handknit")}
               </Link>
-              <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+              <Link href="/about" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("关于", "About")}
               </Link>
-              <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+              <Link href="/contact" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("联系", "Contact")}
               </Link>
             </div>
@@ -92,13 +92,13 @@ export default function Navbar() {
                   <Search className="h-5 w-5" />
                 </Button>
                 {isSearchOpen && (
-                  <form onSubmit={handleSearch} className="absolute right-0 top-12 bg-white dark:bg-gray-800 border rounded-lg shadow-lg p-2 flex gap-2">
+                  <form onSubmit={handleSearch} className={`absolute right-0 top-12 border rounded-lg shadow-lg p-2 flex gap-2 ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white'}`}>
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder={t("搜索...", "Search...")}
-                      className="px-3 py-1 border rounded w-48 bg-white dark:bg-gray-700 dark:text-white"
+                      className={`px-3 py-1 border rounded w-48 ${theme === 'dark' ? 'bg-gray-700 text-white border-gray-600' : ''}`}
                       autoFocus
                     />
                     <Button type="submit" size="sm" variant="gradient">
@@ -149,27 +149,27 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t bg-white dark:bg-gray-900">
+          <div className={`md:hidden border-t ${theme === 'dark' ? 'bg-gray-900 border-gray-800' : 'bg-white'}`}>
             <div className="px-4 py-2 space-y-1">
-              <Link href="/" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+              <Link href="/" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("首页", "Home")}
               </Link>
-              <Link href="/products" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+              <Link href="/products" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("产品", "Products")}
               </Link>
-              <Link href="/category/seashell" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+              <Link href="/category/seashell" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("贝壳", "Seashell")}
               </Link>
-              <Link href="/category/chinese" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+              <Link href="/category/chinese" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("中国风", "Chinese")}
               </Link>
-              <Link href="/category/handknit" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+              <Link href="/category/handknit" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("手工", "Handknit")}
               </Link>
-              <Link href="/about" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+              <Link href="/about" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("关于", "About")}
               </Link>
-              <Link href="/contact" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+              <Link href="/contact" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("联系", "Contact")}
               </Link>
             </div>
