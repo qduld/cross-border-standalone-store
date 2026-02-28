@@ -1,8 +1,13 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Star } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { useState } from "react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface ProductCardProps {
   id: string;
@@ -13,6 +18,27 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ id, title, price, image, category }: ProductCardProps) {
+  const { addToCart, cartCount } = useCart();
+  const [isLiked, setIsLiked] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [showLikeToast, setShowLikeToast] = useState(false);
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addToCart({ id, title, price, image });
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2000);
+  };
+
+  const handleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsLiked(!isLiked);
+    if (!isLiked) {
+      setShowLikeToast(true);
+      setTimeout(() => setShowLikeToast(false), 2000);
+    }
+  };
+
   return (
     <div className="group">
       <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
@@ -34,17 +60,19 @@ export function ProductCard({ id, title, price, image, category }: ProductCardPr
           {/* Quick Actions Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
             <div className="flex gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-              <Link href={`/product/${id}`} className="flex-1">
-                <Button className="w-full bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors">
-                  <ShoppingCart className="w-4 h-4 mr-2" />
-                  加购
-                </Button>
-              </Link>
-              <Link href={`/product/${id}`}>
-                <Button className="bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors px-4">
-                  <Heart className="w-4 h-4" />
-                </Button>
-              </Link>
+              <Button
+                onClick={handleAddToCart}
+                className="flex-1 bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors"
+              >
+                <ShoppingCart className="w-4 h-4 mr-2" />
+                加购
+              </Button>
+              <Button
+                onClick={handleLike}
+                className={`bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors px-4 ${isLiked ? 'text-red-500 hover:text-white' : ''}`}
+              >
+                <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
+              </Button>
             </div>
           </div>
 
@@ -79,6 +107,19 @@ export function ProductCard({ id, title, price, image, category }: ProductCardPr
             </Link>
           </div>
         </div>
+
+        {/* Toast Notification */}
+        {showToast && (
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-10 animate-pulse">
+            ✓ 已加入购物车
+          </div>
+        )}
+
+        {showLikeToast && (
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg z-10 animate-pulse">
+            ♥ 已收藏
+          </div>
+        )}
       </div>
     </div>
   );

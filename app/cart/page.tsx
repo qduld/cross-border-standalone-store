@@ -1,36 +1,42 @@
+"use client"
+
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Trash2, Plus, Minus } from "lucide-react";
-
-// Mock cart data
-const cartItems = [
-  {
-    id: "1",
-    title: "Seashell Hairpin - Ocean Waves",
-    titleEn: "Seashell Hairpin - Ocean Waves",
-    price: 28.00,
-    quantity: 2,
-    image: "/products/12d62135-8563-46a1-9e71-14f55e56b772.jpg",
-    category: "Seashell Jewelry",
-  },
-  {
-    id: "5",
-    title: "琵琶发夹 - 红色",
-    titleEn: "Pipa Style Hair Clip - Red",
-    price: 35.00,
-    quantity: 1,
-    image: "/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg",
-    category: "Chinese Style",
-  },
-];
+import { useCart } from "@/context/CartContext";
 
 export default function CartPage() {
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shipping = subtotal > 50 ? 0 : 10;
-  const total = subtotal + shipping;
+  const { cart, removeFromCart, updateQuantity, cartTotal, cartCount } = useCart();
+  const shipping = cartTotal > 50 ? 0 : 10;
+  const total = cartTotal + shipping;
+
+  if (cart.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white">
+        <Navbar />
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="text-6xl mb-4">🛒</div>
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
+              购物车是空的
+            </h1>
+            <p className="text-gray-600 mb-8">
+              还没有添加任何商品，快去挑选吧！
+            </p>
+            <Link href="/products">
+              <Button size="lg" variant="gradient">
+                浏览商品
+              </Button>
+            </Link>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white">
@@ -43,7 +49,7 @@ export default function CartPage() {
             购物车
           </h1>
           <p className="text-xl text-gray-600 mt-2">
-            Shopping Cart ({cartItems.length} items)
+            Shopping Cart ({cartCount} items)
           </p>
         </div>
       </section>
@@ -54,7 +60,7 @@ export default function CartPage() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
-              {cartItems.map((item) => (
+              {cart.map((item) => (
                 <Card key={item.id} className="overflow-hidden hover:shadow-lg transition-shadow border border-red-100">
                   <CardContent className="p-6">
                     <div className="flex gap-6">
@@ -63,7 +69,7 @@ export default function CartPage() {
                         <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl overflow-hidden">
                           <img
                             src={item.image}
-                            alt={item.titleEn}
+                            alt={item.title}
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                           />
                         </div>
@@ -74,14 +80,15 @@ export default function CartPage() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="font-bold text-gray-900 mb-1">
-                              {item.titleEn}
+                              {item.title}
                             </h3>
-                            <p className="text-sm text-gray-600">{item.title}</p>
-                            <span className="inline-block bg-red-50 text-red-700 text-xs font-medium px-3 py-1 rounded-full mt-2">
-                              {item.category}
-                            </span>
                           </div>
-                          <Button variant="ghost" size="icon" className="text-red-600 hover:text-red-700">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="text-red-600 hover:text-red-700"
+                            onClick={() => removeFromCart(item.id)}
+                          >
                             <Trash2 className="w-5 h-5" />
                           </Button>
                         </div>
@@ -93,6 +100,7 @@ export default function CartPage() {
                               variant="outline"
                               size="icon"
                               className="w-8 h-8 rounded-full"
+                              onClick={() => updateQuantity(item.id, item.quantity - 1)}
                             >
                               <Minus className="w-4 h-4" />
                             </Button>
@@ -101,6 +109,7 @@ export default function CartPage() {
                               variant="outline"
                               size="icon"
                               className="w-8 h-8 rounded-full"
+                              onClick={() => updateQuantity(item.id, item.quantity + 1)}
                             >
                               <Plus className="w-4 h-4" />
                             </Button>
@@ -141,7 +150,7 @@ export default function CartPage() {
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-gray-600">小计 Subtotal</span>
-                      <span className="font-semibold">${subtotal.toFixed(2)}</span>
+                      <span className="font-semibold">${cartTotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">运费 Shipping</span>
