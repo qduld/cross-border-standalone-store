@@ -141,31 +141,91 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Hero Image with Chinese Frame */}
+            {/* Hero Image with Dynamic Global Shipping Theme */}
             <div className="relative">
-              <div className="relative aspect-square bg-gradient-to-br from-red-100 to-orange-50 rounded-3xl p-8 shadow-2xl overflow-hidden">
-                {/* Chinese Pattern Overlay */}
-                <div className="absolute inset-0 opacity-10">
-                  <div className="absolute top-4 left-4 text-9xl">🌸</div>
-                  <div className="absolute bottom-4 right-4 text-9xl">🎋</div>
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl">🏮</div>
+              <div className="relative aspect-square bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-700 rounded-3xl p-8 shadow-2xl overflow-hidden">
+                {/* Animated Background Effects */}
+                <div className="absolute inset-0">
+                  {/* Moving Ocean Waves */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-blue-900/50 via-transparent to-cyan-900/50 animate-pulse"></div>
+                  
+                  {/* Floating Particles */}
+                  <div className="absolute top-20 left-20 w-4 h-4 bg-white/20 rounded-full animate-bounce" style={{ animationDuration: '3s' }}></div>
+                  <div className="absolute top-40 right-30 w-3 h-3 bg-cyan-300/30 rounded-full animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }}></div>
+                  <div className="absolute bottom-32 left-40 w-2 h-2 bg-white/30 rounded-full animate-bounce" style={{ animationDuration: '5s', animationDelay: '2s' }}></div>
+                  
+                  {/* Globe/Circle Animation */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border-2 border-white/20 rounded-full animate-pulse"></div>
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-cyan-300/20 rounded-full animate-ping" style={{ animationDuration: '3s' }}></div>
+                  
+                  {/* Shipping Routes Animation */}
+                  <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                    <circle cx="50%" cy="50%" r="40%" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+                    <circle cx="50%" cy="50%" r="60%" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+                    
+                    {/* Animated Shipping Route */}
+                    <path 
+                      d="M 150 200 Q 200 100 300 150 T 450 200" 
+                      fill="none" 
+                      stroke="rgba(255,255,255,0.3)" 
+                      strokeWidth="2"
+                      strokeDasharray="10 5"
+                      className="animate-pulse"
+                    />
+                    
+                    {/* Moving Ship/Packet */}
+                    <circle cx="200" cy="150" r="8" fill="#60a5fa" className="animate-bounce">
+                      <animateMotion dur="3s" repeatCount="indefinite" path="M 150 200 Q 200 100 300 150 T 450 200" />
+                    </circle>
+                  </svg>
                 </div>
 
-                <div className="relative z-10 h-full flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-8xl mb-4 animate-bounce">🐚</div>
-                    <div className="text-4xl font-bold text-red-800 mb-2">贝壳饰品</div>
-                    <div className="text-xl text-gray-600">Sea Shell Collection</div>
+                {/* Content */}
+                <div className="relative z-10 h-full flex flex-col items-center justify-center text-white">
+                  {/* Rotating Globe Emoji */}
+                  <div className="relative mb-6">
+                    <div className="text-9xl animate-[spin_20s_linear_infinite]">🌍</div>
+                    {/* Glowing Ring */}
+                    <div className="absolute inset-0 border-4 border-cyan-400/30 rounded-full animate-ping" style={{ animationDuration: '2s' }}></div>
+                  </div>
+                  
+                  <div className="text-center space-y-2">
+                    <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
+                      全球配送
+                    </div>
+                    <div className="text-xl text-cyan-100">Worldwide Shipping</div>
+                    
+                    {/* Animated Stats */}
+                    <div className="mt-6 flex items-center justify-center gap-8">
+                      <div className="text-center">
+                        <div className="text-3xl font-bold animate-bounce" style={{ animationDuration: '2s' }}>50+</div>
+                        <div className="text-sm text-cyan-200">Countries</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold animate-bounce" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }}>100%</div>
+                        <div className="text-sm text-cyan-200">Handcrafted</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-bold animate-bounce" style={{ animationDuration: '3s', animationDelay: '1s' }}>24/7</div>
+                        <div className="text-sm text-cyan-200">Support</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                {/* Gradient Overlay for Depth */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-cyan-900/20 pointer-events-none"></div>
               </div>
 
               {/* Floating Elements */}
               <div className="absolute -top-4 -right-4 bg-white rounded-full p-4 shadow-xl animate-bounce" style={{ animationDuration: '3s' }}>
-                <span className="text-3xl">💎</span>
+                <span className="text-3xl">🐚</span>
               </div>
               <div className="absolute -bottom-4 -left-4 bg-white rounded-full p-4 shadow-xl animate-bounce" style={{ animationDuration: '4s' }}>
-                <span className="text-3xl">🌸</span>
+                <span className="text-3xl">🌊</span>
+              </div>
+              <div className="absolute top-1/2 -right-6 bg-cyan-500 rounded-full p-3 shadow-xl animate-pulse" style={{ animationDuration: '2s' }}>
+                <span className="text-2xl">✈️</span>
               </div>
             </div>
           </div>
