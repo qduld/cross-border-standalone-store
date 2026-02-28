@@ -63,12 +63,13 @@ const categoryData: Record<string, {
   }
 };
 
-export default function CategoryPage({
+export default async function CategoryPage({
   params,
 }: {
-  params: { category: string };
+  params: Promise<{ category: string }>;
 }) {
-  const category = categoryData[params.category];
+  const { category: categorySlug } = await params;
+  const category = categoryData[categorySlug];
 
   if (!category) {
     return (
