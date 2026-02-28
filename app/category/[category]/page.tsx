@@ -1,7 +1,11 @@
+"use client"
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
+import { useParams } from "next/navigation";
 
 const categoryData: Record<string, {
   name: string;
@@ -65,23 +69,23 @@ const categoryData: Record<string, {
   }
 };
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: Promise<{ category: string }>;
-}) {
-  const { category: categorySlug } = await params;
+export default function CategoryPage() {
+  const { t } = useLanguage();
+  const params = useParams();
+  const categorySlug = params.category as string;
   const category = categoryData[categorySlug];
 
   if (!category) {
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen dark:bg-gray-900 dark:text-white">
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-3xl font-bold mb-4">Category Not Found</h1>
-          <Button onClick={() => window.location.href = "/products"}>
-            View All Products
-          </Button>
+          <h1 className="text-3xl font-bold mb-4">{t("分类未找到", "Category Not Found")}</h1>
+          <Link href="/products">
+            <Button>
+              {t("查看全部产品", "View All Products")}
+            </Button>
+          </Link>
         </div>
         <Footer />
       </div>
@@ -89,20 +93,20 @@ export default async function CategoryPage({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white dark:bg-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 dark:text-white">
       <Navbar />
 
       {/* Page Header - Simplified like Products page */}
-      <div className="bg-gradient-to-r from-red-50 to-orange-50 py-12 border-b border-red-100">
+      <div className="bg-gradient-to-r from-red-50 to-orange-50 py-12 border-b border-red-100 dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-700 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-4 mb-2">
             <span className="text-5xl">{category.icon}</span>
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
-              {category.nameEn}
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent dark:text-white dark:bg-none">
+              {t(category.name, category.nameEn)}
             </h1>
           </div>
-          <p className="text-gray-600 text-lg max-w-2xl">
-            {category.description}
+          <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl">
+            {t(category.description, category.descriptionEn)}
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-red-700 to-orange-500 mt-4 rounded-full"></div>
         </div>
@@ -113,8 +117,8 @@ export default async function CategoryPage({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {category.products.map((product) => (
             <Link key={product.id} href={`/product/${product.id}`}>
-              <div className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+              <div className="group relative overflow-hidden rounded-2xl bg-white dark:bg-gray-700 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-600 dark:to-gray-700">
                   <img
                     src={product.image}
                     alt={product.title}
@@ -123,24 +127,24 @@ export default async function CategoryPage({
                   
                   <div className="absolute top-4 left-4 flex flex-col gap-2">
                     <span className="bg-red-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
-                      热销
+                      {t("热销", "Hot")}
                     </span>
                   </div>
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
                     <Button className="bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors">
-                      查看详情
+                      {t("查看详情", "View Details")}
                     </Button>
                   </div>
                 </div>
 
                 <div className="p-6">
-                  <div className="text-xs text-red-700 mb-2 font-bold">{category.nameEn}</div>
-                  <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-700 transition-colors">
+                  <div className="text-xs text-red-700 mb-2 font-bold">{t(category.name, category.nameEn)}</div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-red-700 transition-colors">
                     {product.title}
                   </h3>
                   <div className="flex items-center justify-between">
-                    <p className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
+                    <p className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent dark:text-white dark:bg-none">
                       ${product.price.toFixed(2)}
                     </p>
                   </div>
@@ -153,7 +157,7 @@ export default async function CategoryPage({
         {category.products.length === 0 && (
           <div className="text-center py-16">
             <div className="text-6xl mb-4">🔍</div>
-            <p className="text-gray-500 text-lg">No products available in this category yet.</p>
+            <p className="text-gray-500 dark:text-gray-400 text-lg">{t("该分类下暂无产品", "No products available in this category yet.")}</p>
           </div>
         )}
       </div>
