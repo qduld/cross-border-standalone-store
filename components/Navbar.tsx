@@ -1,13 +1,17 @@
 "use client"
 
 import Link from "next/link";
-import { ShoppingCart, Search, User, Menu, X } from "lucide-react";
+import { ShoppingCart, Search, User, Menu, X, Moon, Sun, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 import { useState } from "react";
 
 export default function Navbar() {
   const { cartCount } = useCart();
+  const { language, setLanguage, t } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,7 +25,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white border-b">
+      <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 border-b dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -33,31 +37,51 @@ export default function Navbar() {
 
             {/* Navigation Links - Desktop */}
             <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-700 hover:text-red-700 transition font-medium">
-                Home
+              <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+                {t("首页", "Home")}
               </Link>
-              <Link href="/products" className="text-gray-700 hover:text-red-700 transition font-medium">
-                Products
+              <Link href="/products" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+                {t("产品", "Products")}
               </Link>
-              <Link href="/category/seashell" className="text-gray-700 hover:text-red-700 transition font-medium">
-                Seashell
+              <Link href="/category/seashell" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+                {t("贝壳", "Seashell")}
               </Link>
-              <Link href="/category/chinese" className="text-gray-700 hover:text-red-700 transition font-medium">
-                Chinese
+              <Link href="/category/chinese" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+                {t("中国风", "Chinese")}
               </Link>
-              <Link href="/category/handknit" className="text-gray-700 hover:text-red-700 transition font-medium">
-                Handknit
+              <Link href="/category/handknit" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+                {t("手工", "Handknit")}
               </Link>
-              <Link href="/about" className="text-gray-700 hover:text-red-700 transition font-medium">
-                About
+              <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+                {t("关于", "About")}
               </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-red-700 transition font-medium">
-                Contact
+              <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-red-700 transition font-medium">
+                {t("联系", "Contact")}
               </Link>
             </div>
 
             {/* Right Side */}
             <div className="flex items-center space-x-2 md:space-x-4">
+              {/* Language Toggle */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setLanguage(language === "zh" ? "en" : "zh")}
+                title={language === "zh" ? "Switch to English" : "切换到中文"}
+              >
+                <Globe className="h-5 w-5" />
+              </Button>
+
+              {/* Theme Toggle */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                title={theme === "light" ? "Dark Mode" : "Light Mode"}
+              >
+                {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+              </Button>
+
               {/* Search Button */}
               <div className="relative">
                 <Button
@@ -68,17 +92,17 @@ export default function Navbar() {
                   <Search className="h-5 w-5" />
                 </Button>
                 {isSearchOpen && (
-                  <form onSubmit={handleSearch} className="absolute right-0 top-12 bg-white border rounded-lg shadow-lg p-2 flex gap-2">
+                  <form onSubmit={handleSearch} className="absolute right-0 top-12 bg-white dark:bg-gray-800 border rounded-lg shadow-lg p-2 flex gap-2">
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="搜索..."
-                      className="px-3 py-1 border rounded w-48"
+                      placeholder={t("搜索...", "Search...")}
+                      className="px-3 py-1 border rounded w-48 bg-white dark:bg-gray-700 dark:text-white"
                       autoFocus
                     />
                     <Button type="submit" size="sm" variant="gradient">
-                      搜索
+                      {t("搜索", "Search")}
                     </Button>
                   </form>
                 )}
@@ -125,28 +149,28 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t bg-white">
+          <div className="md:hidden border-t bg-white dark:bg-gray-900">
             <div className="px-4 py-2 space-y-1">
-              <Link href="/" className="block py-2 text-gray-700 hover:text-red-700">
-                Home
+              <Link href="/" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+                {t("首页", "Home")}
               </Link>
-              <Link href="/products" className="block py-2 text-gray-700 hover:text-red-700">
-                Products
+              <Link href="/products" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+                {t("产品", "Products")}
               </Link>
-              <Link href="/category/seashell" className="block py-2 text-gray-700 hover:text-red-700">
-                Seashell
+              <Link href="/category/seashell" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+                {t("贝壳", "Seashell")}
               </Link>
-              <Link href="/category/chinese" className="block py-2 text-gray-700 hover:text-red-700">
-                Chinese
+              <Link href="/category/chinese" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+                {t("中国风", "Chinese")}
               </Link>
-              <Link href="/category/handknit" className="block py-2 text-gray-700 hover:text-red-700">
-                Handknit
+              <Link href="/category/handknit" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+                {t("手工", "Handknit")}
               </Link>
-              <Link href="/about" className="block py-2 text-gray-700 hover:text-red-700">
-                About
+              <Link href="/about" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+                {t("关于", "About")}
               </Link>
-              <Link href="/contact" className="block py-2 text-gray-700 hover:text-red-700">
-                Contact
+              <Link href="/contact" className="block py-2 text-gray-700 dark:text-gray-300 hover:text-red-700">
+                {t("联系", "Contact")}
               </Link>
             </div>
           </div>
