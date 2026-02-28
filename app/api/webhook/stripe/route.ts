@@ -37,6 +37,7 @@ export async function POST(request: Request) {
       const items = JSON.parse(paymentIntent.metadata.items || '[]')
       const customerName = paymentIntent.metadata.customer_name || ''
       const customerEmail = paymentIntent.metadata.customer_email || ''
+      const shippingAddress = JSON.parse(paymentIntent.metadata.shipping_address || '{}')
 
       // Generate order number
       const orderNumber = `ORD-${Date.now().toString().slice(-6)}`
@@ -46,6 +47,7 @@ export async function POST(request: Request) {
           orderNumber,
           customerName,
           customerEmail,
+          shippingAddress,
           items,
           subtotal: paymentIntent.amount / 100,
           shipping: 0, // Calculate based on your shipping logic

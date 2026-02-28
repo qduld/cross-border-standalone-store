@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { amount, items, customer } = body
+    const { amount, items, customer, shippingAddress } = body
 
     // Create a payment intent
     const paymentIntent = await stripe.paymentIntents.create({
@@ -18,6 +18,7 @@ export async function POST(request: Request) {
         items: JSON.stringify(items),
         customer_name: customer.name,
         customer_email: customer.email,
+        shipping_address: shippingAddress ? JSON.stringify(shippingAddress) : '{}',
       },
     })
 
