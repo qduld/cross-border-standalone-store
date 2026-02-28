@@ -1,22 +1,15 @@
 import { PrismaClient } from '@prisma/client'
 
-const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined
-}
-
 let prismaInstance: PrismaClient | undefined = undefined
 
-function getPrisma(): PrismaClient {
-  if (!prismaInstance) {
-    prismaInstance = new PrismaClient()
-    if (process.env.NODE_ENV !== 'production') {
-      globalForPrisma.prisma = prismaInstance
+export const prisma = new Proxy({} as PrismaClient, {
+  get(_target, prop) {
+    if (!prismaInstance) {
+      prismaInstance = new PrismaClient()
     }
-  }
-  return prismaInstance
-}
-
-export const prisma = getPrisma()
+    return prismaInstance[prop as keyof PrismaClient]
+  },
+})
 
 // Helper function to test database connection
 export async function testConnection() {
