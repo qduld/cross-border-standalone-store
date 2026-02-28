@@ -143,97 +143,100 @@ export default function Home() {
 
             {/* Hero Image - Premium Product Showcase */}
             <div className="relative">
-              <div className="relative aspect-square bg-gradient-to-br from-gray-50 via-white to-red-50/30 rounded-3xl p-0 shadow-2xl overflow-hidden">
-                {/* Background Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/40"></div>
+              <div className="relative aspect-[4/3] lg:aspect-square bg-gradient-to-br from-gray-50 via-red-50/20 to-orange-50/30 rounded-3xl p-6 shadow-2xl overflow-hidden">
+                {/* Elegant Background Pattern */}
+                <div className="absolute inset-0 opacity-5">
+                  <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-red-200 to-orange-100 rounded-full blur-3xl"></div>
+                  <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-red-200 to-orange-100 rounded-full blur-3xl"></div>
+                </div>
                 
+                {/* Geometric Pattern */}
+                <div className="absolute inset-0">
+                  <svg className="w-full h-full opacity-5" viewBox="0 0 400 400">
+                    <defs>
+                      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                      </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                  </svg>
+                </div>
+
                 {/* Main Product Display */}
-                <div className="relative h-full flex flex-col items-center justify-center p-8">
-                  {/* Premium Product Grid */}
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    {/* Background Product Image */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-30 scale-110">
-                      <div className="w-64 h-64 rounded-full bg-gradient-to-br from-red-200 to-orange-100 blur-3xl"></div>
-                    </div>
-                    
-                    {/* Featured Products - Rotating Carousel */}
-                    <div className="relative z-10 w-full max-w-md h-full flex items-center justify-center">
-                      <div className="grid grid-cols-2 gap-4 w-full h-full">
-                        {/* Product 1 - Seashell */}
-                        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                          <div className="aspect-square overflow-hidden">
-                            <img
-                              src="/products/12d62135-8563-46a1-9e71-14f55e56b772.jpg"
-                              alt="Seashell Hairpin"
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                          </div>
-                          <div className="absolute top-3 right-3 bg-red-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
-                            热销
-                          </div>
+                <div className="relative h-full flex flex-col items-center justify-center">
+                  {/* Featured Products Grid */}
+                  <div className="relative w-full max-w-lg">
+                    <div className="grid grid-cols-2 gap-3 lg:gap-4">
+                      {/* Product 1 - Seashell */}
+                      <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div className="aspect-square overflow-hidden">
+                          <img
+                            src="/products/12d62135-8563-46a1-9e71-14f55e56b772.jpg"
+                            alt="Seashell Hairpin"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
                         </div>
-                        
-                        {/* Product 2 - Chinese Style */}
-                        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 mt-8">
-                          <div className="aspect-square overflow-hidden">
-                            <img
-                              src="/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg"
-                              alt="Pipa Hair Clip"
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                          </div>
-                          <div className="absolute top-3 right-3 bg-gradient-to-r from-red-600 to-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
-                            精选
-                          </div>
+                        <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                          热销
                         </div>
-                        
-                        {/* Product 3 - Handknit */}
-                        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 -mt-4">
-                          <div className="aspect-square overflow-hidden">
-                            <img
-                              src="/products/c87bc927-beb7-48f1-bf6f-80087967bcde.jpg"
-                              alt="Panda Doll"
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                          </div>
-                          <div className="absolute top-3 right-3 bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
-                            新品
-                          </div>
+                      </div>
+                      
+                      {/* Product 2 - Chinese Style */}
+                      <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 lg:mt-6">
+                        <div className="aspect-square overflow-hidden">
+                          <img
+                            src="/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg"
+                            alt="Pipa Hair Clip"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
                         </div>
-                        
-                        {/* Product 4 - Necklace */}
-                        <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 mt-4">
-                          <div className="aspect-square overflow-hidden">
-                            <img
-                              src="/products/76992cd5-3fc0-4234-b49e-8cfa198a2c75.jpg"
-                              alt="Seashell Necklace"
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
-                          </div>
+                        <div className="absolute top-2 right-2 bg-gradient-to-r from-red-600 to-orange-500 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                          精选
+                        </div>
+                      </div>
+                      
+                      {/* Product 3 - Handknit */}
+                      <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 -lg:mt-4">
+                        <div className="aspect-square overflow-hidden">
+                          <img
+                            src="/products/c87bc927-beb7-48f1-bf6f-80087967bcde.jpg"
+                            alt="Panda Doll"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        </div>
+                        <div className="absolute top-2 right-2 bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
+                          新品
+                        </div>
+                      </div>
+                      
+                      {/* Product 4 - Necklace */}
+                      <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 lg:mt-2">
+                        <div className="aspect-square overflow-hidden">
+                          <img
+                            src="/products/76992cd5-3fc0-4234-b49e-8cfa198a2c75.jpg"
+                            alt="Seashell Necklace"
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
                         </div>
                       </div>
                     </div>
-                    
-                    {/* Decorative Elements */}
-                    <div className="absolute top-4 right-4 text-4xl animate-pulse opacity-50">✨</div>
-                    <div className="absolute bottom-4 left-4 text-4xl animate-pulse opacity-50" style={{ animationDelay: '0.5s' }}>🌸</div>
                   </div>
                 </div>
 
                 {/* Floating Tag */}
-                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl border border-red-100">
+                <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg">
+                    <div className="flex items-center gap-2 lg:gap-3">
+                      <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-xl lg:text-2xl shadow-lg">
                         🎁
                       </div>
                       <div>
-                        <div className="text-sm text-gray-600">精选系列</div>
-                        <div className="font-bold text-gray-900">Three Collections</div>
+                        <div className="text-xs lg:text-sm text-gray-600">精选系列</div>
+                        <div className="font-bold text-sm lg:text-base text-gray-900">Three Collections</div>
                       </div>
                     </div>
                     <Link href="/products">
-                      <Button variant="gradient" size="sm" className="rounded-full">
+                      <Button variant="gradient" size="sm" className="rounded-full text-xs lg:text-sm px-3 lg:px-4">
                         查看全部 →
                       </Button>
                     </Link>
@@ -242,10 +245,10 @@ export default function Home() {
               </div>
 
               {/* Floating Decorative Elements */}
-              <div className="absolute -top-6 -right-6 bg-gradient-to-br from-red-500 to-orange-400 rounded-2xl p-3 shadow-xl animate-float" style={{ animationDuration: '4s' }}>
+              <div className="absolute -top-4 -right-4 bg-gradient-to-br from-red-500 to-orange-400 rounded-2xl p-3 shadow-xl animate-float" style={{ animationDuration: '4s' }}>
                 <span className="text-3xl">🐚</span>
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-3 shadow-xl animate-float" style={{ animationDuration: '5s', animationDelay: '1s' }}>
+              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl p-3 shadow-xl animate-float" style={{ animationDuration: '5s', animationDelay: '1s' }}>
                 <span className="text-3xl">🎋</span>
               </div>
             </div>
