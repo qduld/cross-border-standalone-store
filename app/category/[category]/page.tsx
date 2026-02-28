@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const categoryData: Record<string, {
   name: string;
@@ -89,81 +89,73 @@ export default async function CategoryPage({
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white">
       <Navbar />
 
-      {/* Category Header */}
-      <div className="relative py-16 bg-gradient-to-br" style={{
-        background: `linear-gradient(to bottom right, ${category.color.split(' ')[0].replace('from-', '')}, ${category.color.split(' ')[1].replace('to-', '')})`
-      }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <div className="text-8xl mb-4">{category.icon}</div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{category.nameEn}</h1>
-          <h2 className="text-2xl mb-6 opacity-90">{category.name}</h2>
-          <p className="text-lg opacity-90 max-w-2xl mx-auto mb-2">
-            {category.descriptionEn}
-          </p>
-          <p className="text-lg opacity-90 max-w-2xl mx-auto">
+      {/* Page Header - Simplified like Products page */}
+      <div className="bg-gradient-to-r from-red-50 to-orange-50 py-12 border-b border-red-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-4 mb-2">
+            <span className="text-5xl">{category.icon}</span>
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
+              {category.nameEn}
+            </h1>
+          </div>
+          <p className="text-gray-600 text-lg max-w-2xl">
             {category.description}
           </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-red-700 to-orange-500 mt-4 rounded-full"></div>
         </div>
       </div>
 
-      {/* Products Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">
-              {category.products.length} Products
-            </h2>
-          </div>
-          {/* Sort options can be added here */}
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Product Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {category.products.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              price={product.price}
-              image={product.image}
-              category={category.nameEn}
-            />
+            <Link key={product.id} href={`/product/${product.id}`}>
+              <div className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                  <img
+                    src={product.image}
+                    alt={product.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                  />
+                  
+                  <div className="absolute top-4 left-4 flex flex-col gap-2">
+                    <span className="bg-red-700 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse">
+                      热销
+                    </span>
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                    <Button className="bg-white text-gray-900 hover:bg-red-700 hover:text-white transition-colors">
+                      查看详情
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="p-6">
+                  <div className="text-xs text-red-700 mb-2 font-bold">{category.nameEn}</div>
+                  <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-700 transition-colors">
+                    {product.title}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <p className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
+                      ${product.price.toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
 
         {category.products.length === 0 && (
           <div className="text-center py-16">
+            <div className="text-6xl mb-4">🔍</div>
             <p className="text-gray-500 text-lg">No products available in this category yet.</p>
           </div>
         )}
-      </div>
-
-      {/* Category Features */}
-      <div className="bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            Why Choose Our {category.nameEn}?
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-xl p-5 shadow-sm">
-              <div className="text-3xl mb-3">🎨</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Handcrafted</h3>
-              <p className="text-gray-600 text-sm">Each piece is carefully crafted by skilled artisans</p>
-            </div>
-            <div className="bg-white rounded-xl p-5 shadow-sm">
-              <div className="text-3xl mb-3">🌿</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Natural Materials</h3>
-              <p className="text-gray-600 text-sm">Made with eco-friendly and natural materials</p>
-            </div>
-            <div className="bg-white rounded-xl p-5 shadow-sm">
-              <div className="text-3xl mb-3">✨</div>
-              <h3 className="font-semibold text-gray-900 mb-2">Unique Design</h3>
-              <p className="text-gray-600 text-sm">Fusion of traditional and modern aesthetics</p>
-            </div>
-          </div>
-        </div>
       </div>
 
       <Footer />
