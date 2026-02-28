@@ -157,10 +157,10 @@ export default function ContactPage() {
                   如有紧急问题，请通过我们的社交媒体联系
                 </p>
                 <div className="flex gap-3">
-                  <Button variant="secondary" size="sm">
+                  <Button variant="outline" size="sm">
                     微信
                   </Button>
-                  <Button variant="secondary" size="sm">
+                  <Button variant="outline" size="sm">
                     微博
                   </Button>
                 </div>
