@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, ProductStatus } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -59,7 +59,7 @@ async function main() {
       categoryId: seashell.id,
       images: ['/products/12d62135-8563-46a1-9e71-14f55e56b772.jpg'],
       stock: 15,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         colors: ['Natural', 'Pink', 'Blue'],
@@ -76,7 +76,7 @@ async function main() {
       categoryId: seashell.id,
       images: ['/products/76992cd5-3fc0-4234-b49e-8cfa198a2c75.jpg'],
       stock: 12,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         colors: ['Coral', 'White', 'Pink'],
@@ -93,7 +93,7 @@ async function main() {
       categoryId: seashell.id,
       images: ['/products/fcfb12aa-364d-4287-9dbf-4708c50abaea.jpg'],
       stock: 18,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: false,
       variants: {
         colors: ['Natural', 'Blue'],
@@ -110,7 +110,7 @@ async function main() {
       categoryId: seashell.id,
       images: ['/products/031029c0-f688-41a0-acab-b736967ba122.jpg'],
       stock: 20,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: false,
       variants: {
         colors: ['Natural', 'Pink'],
@@ -141,7 +141,7 @@ async function main() {
       categoryId: chinese.id,
       images: ['/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg'],
       stock: 20,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         colors: ['Red', 'Gold', 'Blue'],
@@ -158,7 +158,7 @@ async function main() {
       categoryId: chinese.id,
       images: ['/products/c0ad822d-f16f-40b4-b4ae-7f7425b6de54.jpg'],
       stock: 15,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         colors: ['Gold Red', 'Silver Blue', 'Copper Green'],
@@ -175,7 +175,7 @@ async function main() {
       categoryId: chinese.id,
       images: ['/products/2178554d-62e5-4da6-befa-1ef7268ce8cb.jpg'],
       stock: 18,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: false,
       variants: {
         colors: ['Green', 'Yellow', 'Pink'],
@@ -192,7 +192,7 @@ async function main() {
       categoryId: chinese.id,
       images: ['/products/ab987880-1bc0-4d1a-b576-a6f4de430518.jpg'],
       stock: 10,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         colors: ['Gold', 'Silver', 'Copper'],
@@ -209,7 +209,7 @@ async function main() {
       categoryId: chinese.id,
       images: ['/products/47d8f059-0dse-4c88-9eeb-435e066ad9ce.jpg'],
       stock: 8,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         colors: ['Gold', 'Silver'],
@@ -226,7 +226,7 @@ async function main() {
       categoryId: chinese.id,
       images: ['/products/674a97be-cd48-446e-b3b5-4adb4746e8bd.jpg'],
       stock: 12,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         styles: ['Gold Lock', 'Silver Lock'],
@@ -243,7 +243,7 @@ async function main() {
       categoryId: chinese.id,
       images: ['/products/9b4e7f41-4ad6-40e5-b2d7-497dda480ec6.jpg'],
       stock: 15,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: false,
       variants: {
         colors: ['Copper', 'Brass'],
@@ -260,7 +260,7 @@ async function main() {
       categoryId: chinese.id,
       images: ['/products/c32cf27b-b1e5-43de-b85a-1c7a13305945.jpg'],
       stock: 20,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: false,
       variants: {
         colors: ['Red', 'Blue', 'Purple'],
@@ -291,7 +291,7 @@ async function main() {
       categoryId: handknit.id,
       images: ['/products/c87bc927-beb7-48f1-bf6f-80087967bcde.jpg'],
       stock: 8,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         colors: ['Black & White'],
@@ -308,7 +308,7 @@ async function main() {
       categoryId: handknit.id,
       images: ['/products/76e8ea00-efa5-49e8-96e0-fc1609f2e455.jpg'],
       stock: 10,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: true,
       variants: {
         colors: ['Natural', 'Pink', 'Blue'],
@@ -325,7 +325,7 @@ async function main() {
       categoryId: handknit.id,
       images: ['/products/1442ea1d-fedd-4fa2-8046-8e9c28016c02.jpg'],
       stock: 12,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: false,
       variants: {
         colors: ['White', 'Pink', 'Gray'],
@@ -342,7 +342,7 @@ async function main() {
       categoryId: handknit.id,
       images: ['/products/40ee9736-e778-4f76-9129-1f64ec879a6b.jpg'],
       stock: 10,
-      status: 'ACTIVE',
+      status: ProductStatus.ACTIVE,
       featured: false,
       variants: {
         colors: ['Orange', 'Gray', 'White'],
