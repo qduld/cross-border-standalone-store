@@ -10,31 +10,58 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import Link from "next/link"
 import { useLanguage } from "@/context/LanguageContext"
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const { t } = useLanguage()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  })
   const [isLoading, setIsLoading] = useState(false)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
 
+    // Validation
+    if (!formData.name || !formData.email || !formData.password) {
+      alert(t("请填写所有必填字段", "Please fill in all required fields"))
+      setIsLoading(false)
+      return
+    }
+
+    if (formData.password.length < 6) {
+      alert(t("密码至少需要6位", "Password must be at least 6 characters"))
+      setIsLoading(false)
+      return
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      alert(t("两次输入的密码不一致", "Passwords do not match"))
+      setIsLoading(false)
+      return
+    }
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000))
 
-    // Simple validation
-    if (email && password.length >= 6) {
-      localStorage.setItem("user", JSON.stringify({
-        email,
-        name: email.split("@")[0],
-        isLoggedIn: true
-      }))
-      window.location.href = "/account"
-    } else {
-      alert(t("请输入有效的邮箱和密码（至少6位）", "Please enter valid email and password (at least 6 characters)"))
-    }
+    // Save user
+    localStorage.setItem("user", JSON.stringify({
+      email: formData.email,
+      name: formData.name,
+      isLoggedIn: true
+    }))
 
+    // Redirect to account page
+    window.location.href = "/account"
     setIsLoading(false)
   }
 
@@ -46,22 +73,37 @@ export default function LoginPage() {
         <Card className="border border-red-100 dark:border-gray-600 dark:bg-gray-800">
           <CardHeader>
             <CardTitle className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent dark:text-white dark:bg-none">
-              {t("欢迎回来", "Welcome Back")}
+              {t("创建账户", "Create Account")}
             </CardTitle>
             <CardDescription className="text-gray-600 dark:text-gray-400">
-              {t("登录以管理您的订单和收藏", "Sign in to manage your orders and favorites")}
+              {t("注册以享受更好的购物体验", "Sign up for a better shopping experience")}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
+                <Label htmlFor="name">{t("姓名", "Name")}</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder={t("张三", "John Doe")}
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                />
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="email">{t("邮箱", "Email")}</Label>
                 <Input
                   id="email"
+                  name="email"
                   type="email"
                   placeholder={t("your@email.com", "your@email.com")}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                   className="dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
@@ -71,27 +113,53 @@ export default function LoginPage() {
                 <Label htmlFor="password">{t("密码", "Password")}</Label>
                 <Input
                   id="password"
+                  name="password"
                   type="password"
                   placeholder={t("••••••••", "••••••••")}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  className="dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                />
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  {t("至少6个字符", "At least 6 characters")}
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">{t("确认密码", "Confirm Password")}</Label>
+                <Input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  placeholder={t("••••••••", "••••••••")}
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
                   required
                   className="dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
               </div>
 
-              <div className="flex items-center justify-between text-sm">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="rounded dark:bg-gray-700" />
-                  <span className="text-gray-600 dark:text-gray-400">{t("记住我", "Remember me")}</span>
+              <div className="flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  required
+                  className="mt-1 rounded dark:bg-gray-700"
+                />
+                <label className="text-sm text-gray-600 dark:text-gray-400 cursor-pointer">
+                  {t("我同意", "I agree to the ")}
+                  <Link href="/terms" className="text-red-600 hover:underline mx-1">
+                    {t("服务条款", "Terms of Service")}
+                  </Link>
+                  {t("和", " and ")}
+                  <Link href="/privacy" className="text-red-600 hover:underline mx-1">
+                    {t("隐私政策", "Privacy Policy")}
+                  </Link>
                 </label>
-                <Link href="/forgot-password" className="text-red-600 hover:underline">
-                  {t("忘记密码？", "Forgot password?")}
-                </Link>
               </div>
 
               <Button type="submit" variant="gradient" className="w-full" disabled={isLoading}>
-                {isLoading ? t("登录中...", "Signing in...") : t("登录", "Sign In")}
+                {isLoading ? t("注册中...", "Creating account...") : t("注册", "Sign Up")}
               </Button>
 
               <div className="relative">
@@ -125,9 +193,9 @@ export default function LoginPage() {
 
               <div className="text-center text-sm">
                 <span className="text-gray-600 dark:text-gray-400">
-                  {t("还没有账户？", "Don't have an account?")}{" "}
-                  <Link href="/register" className="text-red-600 hover:underline font-medium">
-                    {t("注册", "Sign Up")}
+                  {t("已有账户？", "Already have an account?")}{" "}
+                  <Link href="/login" className="text-red-600 hover:underline font-medium">
+                    {t("登录", "Sign In")}
                   </Link>
                 </span>
               </div>
