@@ -22,23 +22,26 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(initialTheme)
 
     // Apply theme to document immediately
-    if (initialTheme === "dark") {
-      document.documentElement.classList.add("dark")
-    } else {
-      document.documentElement.classList.remove("dark")
-    }
+    applyTheme(initialTheme)
   }, [])
 
   // Save theme to localStorage and update document whenever it changes
   useEffect(() => {
     localStorage.setItem("theme", theme)
+    applyTheme(theme)
+  }, [theme])
+
+  const applyTheme = (theme: Theme) => {
+    const html = document.documentElement
 
     if (theme === "dark") {
-      document.documentElement.classList.add("dark")
+      html.classList.add("dark")
+      html.classList.remove("light")
     } else {
-      document.documentElement.classList.remove("dark")
+      html.classList.remove("dark")
+      html.classList.add("light")
     }
-  }, [theme])
+  }
 
   const toggleTheme = () => {
     setTheme(prev => prev === "light" ? "dark" : "light")
