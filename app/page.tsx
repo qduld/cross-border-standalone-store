@@ -202,6 +202,9 @@ export default function Home() {
                   animationDelay: `${index * 0.2}s`
                 }}
               >
+                {/* Dark Overlay for Better Contrast */}
+                <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-black/50 pointer-events-none"></div>
+                
                 {/* Chinese Pattern Background */}
                 <div className={`absolute inset-0 ${chinesePatterns[category.pattern as keyof typeof chinesePatterns]}`}></div>
 
@@ -212,8 +215,8 @@ export default function Home() {
                   <h3 className="text-3xl font-bold mb-3 group-hover:text-white/90 transition-colors">
                     {category.name}
                   </h3>
-                  <p className="text-white/80 mb-6">{category.description}</p>
-                  <div className="inline-flex items-center text-sm font-medium group-hover:translate-x-2 transition-transform">
+                  <p className="text-white/90 mb-6 font-medium">{category.description}</p>
+                  <div className="inline-flex items-center text-sm font-bold group-hover:translate-x-2 transition-transform bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
                     立即探索
                     <span className="ml-2">→</span>
                   </div>
