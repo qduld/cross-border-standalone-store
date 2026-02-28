@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart, Star, Flash } from "lucide-react";
+import { Heart, ShoppingCart, Star } from "lucide-react";
 
 interface ProductCardProps {
   id: string;
