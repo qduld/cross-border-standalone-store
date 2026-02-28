@@ -253,11 +253,11 @@ export default function Home() {
             {featuredProducts.map((product, index) => (
               <div
                 key={product.id}
-                className="group animate-fade-in"
+                className="group animate-fade-in h-full"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-                  <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                <div className="relative h-full flex flex-col overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                  <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 shrink-0">
                     <img
                       src={product.image}
                       alt={product.title}
@@ -276,12 +276,12 @@ export default function Home() {
                       </Link>
                     </div>
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <div className="text-xs text-red-700 mb-2 font-medium">{product.category}</div>
-                    <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-red-700 transition-colors">
+                    <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 min-h-[2.75rem] group-hover:text-red-700 transition-colors">
                       {product.title}
                     </h3>
-                    <div className="flex items-center justify-between">
+                    <div className="mt-auto flex items-center justify-between">
                       <p className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent">
                         ${product.price.toFixed(2)}
                       </p>
