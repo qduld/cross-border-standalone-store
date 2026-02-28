@@ -45,6 +45,8 @@ const categoryData: Record<string, {
       { id: "8", title: "Round Mirror - Traditional", price: 45.00, image: "/products/ab987880-1bc0-4d1a-b576-a6f4de430518.jpg" },
       { id: "9", title: "Wu Shi Pao - Buddha Amulet", price: 55.00, image: "/products/47d8f059-0d8e-4c88-9eeb-435e066ad9ce.jpg" },
       { id: "10", title: "Red String Gold Lock", price: 55.00, image: "/products/674a97be-cd48-446e-b3b5-4adb4746e8bd.jpg" },
+      { id: "11", title: "Copper Ring Bracelet", price: 28.00, image: "/products/9b4e7f41-4ad6-40e5-b2d7-497dda480ec6.jpg" },
+      { id: "12", title: "Red String Earrings", price: 25.00, image: "/products/c32cf27b-b1e5-43de-b85a-1c7a13305945.jpg" },
     ]
   },
   handknit: {
@@ -91,7 +93,7 @@ export default async function CategoryPage({
       <Navbar />
 
       {/* Category Header */}
-      <div className="relative py-20 bg-gradient-to-br" style={{
+      <div className="relative py-16 bg-gradient-to-br" style={{
         background: `linear-gradient(to bottom right, ${category.color.split(' ')[0].replace('from-', '')}, ${category.color.split(' ')[1].replace('to-', '')})`
       }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
@@ -108,7 +110,7 @@ export default async function CategoryPage({
       </div>
 
       {/* Products Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">
@@ -139,23 +141,23 @@ export default async function CategoryPage({
       </div>
 
       {/* Category Features */}
-      <div className="bg-gray-50 py-16">
+      <div className="bg-gray-50 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
             Why Choose Our {category.nameEn}?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl p-6 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl p-5 shadow-sm">
               <div className="text-3xl mb-3">🎨</div>
               <h3 className="font-semibold text-gray-900 mb-2">Handcrafted</h3>
               <p className="text-gray-600 text-sm">Each piece is carefully crafted by skilled artisans</p>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
+            <div className="bg-white rounded-xl p-5 shadow-sm">
               <div className="text-3xl mb-3">🌿</div>
               <h3 className="font-semibold text-gray-900 mb-2">Natural Materials</h3>
               <p className="text-gray-600 text-sm">Made with eco-friendly and natural materials</p>
             </div>
-            <div className="bg-white rounded-xl p-6 shadow-sm">
+            <div className="bg-white rounded-xl p-5 shadow-sm">
               <div className="text-3xl mb-3">✨</div>
               <h3 className="font-semibold text-gray-900 mb-2">Unique Design</h3>
               <p className="text-gray-600 text-sm">Fusion of traditional and modern aesthetics</p>
