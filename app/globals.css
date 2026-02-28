@@ -64,6 +64,31 @@ body {
   --color-ring: 357 78% 43%;
 }
 
+/* Force dark mode styles - fallback */
+html:not(.dark) body,
+html:not(.dark) .bg-white,
+html:not(.dark) section {
+  background-color: white !important;
+  color: rgb(23 23 23) !important;
+}
+
+html.dark body,
+html.dark section {
+  background-color: rgb(15 23 42) !important;
+  color: rgb(255 255 255) !important;
+}
+
+/* Card backgrounds */
+html:not(.dark) .bg-white,
+html:not(.dark) .card {
+  background-color: white !important;
+}
+
+html.dark .bg-white,
+html.dark .card {
+  background-color: rgb(31 41 55) !important;
+}
+
 /* Custom Animations */
 @keyframes fade-in {
   from {

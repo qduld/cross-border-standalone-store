@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    // Test theme toggle
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      console.log('Before:', html.classList.toString());
+      
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+      } else {
+        html.classList.add('dark');
+        html.classList.remove('light');
+      }
+      console.log('After:', html.classList.toString());
+      console.log('localStorage:', localStorage.getItem('theme'));
+    }
+    
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+    console.log('Initial theme:', savedTheme);
+  </script>
+  <style>
+    body { transition: background-color 0.3s; }
+    :root { background-color: white; color: black; }
+    .dark { background-color: #1a1a2e; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Theme Toggle Test</h1>
+  <button onclick="toggleTheme()">Toggle Theme</button>
+  <p>Current class: <span id="class"></span></p>
+  <p>localStorage: <span id="storage"></span></p>
+  <script>
+    document.getElementById('class').textContent = document.documentElement.className;
+    document.getElementById('storage').textContent = localStorage.getItem('theme');
+    setInterval(() => {
+      document.getElementById('class').textContent = document.documentElement.className;
+      document.getElementById('storage').textContent = localStorage.getItem('theme');
+    }, 100);
+  </script>
+</body>
+</html>

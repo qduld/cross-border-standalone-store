@@ -41,6 +41,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       html.classList.remove("dark")
       html.classList.add("light")
     }
+
+    // Debug logging
+    console.log('[Theme] Applied:', theme)
+    console.log('[Theme] HTML classes:', html.className)
   }
 
   const toggleTheme = () => {
