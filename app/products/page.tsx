@@ -69,7 +69,7 @@ const allProducts = [
     id: "9",
     title: "Wu Shi Pao - Buddha Amulet",
     price: 55.00,
-    image: "/products/47d8f059-0dse-4c88-9eeb-435e066ad9ce.jpg",
+    image: "/products/47d8f059-0d5e-4c88-9eeb-435e066ad9ce.jpg",
     category: "Chinese Style"
   },
   {
