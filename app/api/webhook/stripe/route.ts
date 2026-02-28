@@ -29,7 +29,7 @@ export async function POST(request: Request) {
   }
 
   // Handle the event
-  switch (event.type) {
+  switch (event.type as string) {
     case 'payment_intent.succeeded':
       const paymentIntent = event.data.object as Stripe.PaymentIntent
       
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
       console.log(`Order created: ${orderNumber}`)
       break
 
-    case 'payment_intent.failed':
+    case 'payment_intent.payment_failed':
       console.error('Payment failed:', event.data.object)
       // You might want to notify the admin or log this
       break
