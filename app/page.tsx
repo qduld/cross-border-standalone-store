@@ -92,8 +92,8 @@ export default function Home() {
         {/* Decorative Chinese Border */}
         <div className="absolute inset-0 border-8 border-red-200 opacity-20 pattern-border"></div>
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid lg:grid-cols-[1.3fr_0.9fr] gap-8 items-center">
             <div className="space-y-8">
               {/* Chinese Seal/Stamp Effect */}
               <div className="inline-block">
@@ -148,7 +148,7 @@ export default function Home() {
 
             {/* Hero Image - Premium Product Showcase */}
             <div className="relative">
-              <div className="relative aspect-[4/3] lg:aspect-square bg-gradient-to-br from-gray-50 dark:from-gray-800 via-red-50/20 dark:via-red-900/20 to-orange-50/30 dark:to-orange-900/30 rounded-3xl p-6 shadow-2xl overflow-hidden flex flex-col">
+              <div className="relative aspect-[4/3] bg-gradient-to-br from-gray-50 dark:from-gray-800 via-red-50/20 dark:via-red-900/20 to-orange-50/30 dark:to-orange-900/30 rounded-3xl p-5 shadow-2xl overflow-hidden flex flex-col">
                 {/* Elegant Background Pattern */}
                 <div className="absolute inset-0 opacity-5">
                   <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-red-200 to-orange-100 rounded-full blur-3xl"></div>
