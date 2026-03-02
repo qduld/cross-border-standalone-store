@@ -1,9 +1,12 @@
+"use client"
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShoppingCart, Heart, Share2, Star, Truck, Shield, Clock } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useParams } from "next/navigation";
 
 // Mock product data
 const mockProducts: Record<string, any> = {
@@ -287,12 +290,9 @@ const relatedProducts = [
   { id: "3", title: { zh: "海星手链", en: "Seashell Bracelet" }, price: 35.00, image: "/products/fcfb12aa-364d-4287-9dbf-4708c50abaea.jpg", rating: 4.7 },
 ];
 
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = await params;
+export default function ProductPage() {
+  const params = useParams();
+  const id = params.id as string;
   const product = mockProducts[id];
 
   if (!product) {
@@ -312,7 +312,6 @@ export default async function ProductPage({
     );
   }
 
-  // This is a client component for language support
   return <ProductDetailClient product={product} />;
 }
 
