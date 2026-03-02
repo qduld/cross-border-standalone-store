@@ -253,7 +253,7 @@ export default function Home() {
               <div className="absolute -top-4 -right-4 bg-gradient-to-br from-red-500 to-orange-400 rounded-2xl p-3 shadow-xl animate-float" style={{ animationDuration: '4s' }}>
                 <span className="text-3xl">🐚</span>
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-white dark:bg-gray-700 rounded-2xl p-3 shadow-xl animate-float" style={{ animationDuration: '5s', animationDelay: '1s' }}>
+              <div className="absolute -top-4 -left-4 bg-white dark:bg-gray-700 rounded-2xl p-3 shadow-xl animate-float" style={{ animationDuration: '5s', animationDelay: '1s' }}>
                 <span className="text-3xl">🎋</span>
               </div>
             </div>
