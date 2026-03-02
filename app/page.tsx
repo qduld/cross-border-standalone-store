@@ -147,7 +147,7 @@ export default function Home() {
             </div>
 
             {/* Hero Image - Premium Product Showcase */}
-            <div className="relative">
+            <div className="relative pb-20">
               <div className="relative aspect-[4/3] lg:aspect-square bg-gradient-to-br from-gray-50 dark:from-gray-800 via-red-50/20 dark:via-red-900/20 to-orange-50/30 dark:to-orange-900/30 rounded-3xl p-6 shadow-2xl overflow-hidden flex flex-col">
                 {/* Elegant Background Pattern */}
                 <div className="absolute inset-0 opacity-5">
@@ -168,7 +168,7 @@ export default function Home() {
                 </div>
 
                 {/* Main Product Display */}
-                <div className="relative flex-grow flex flex-col items-center justify-center pb-4">
+                <div className="relative flex-grow flex flex-col items-center justify-center pb-8">
                   {/* Featured Products Grid */}
                   <div className="relative w-full max-w-lg">
                     <div className="grid grid-cols-2 gap-3 lg:gap-4">
@@ -228,9 +228,9 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Floating Tag - Positioned at bottom within container using flex mt-auto */}
-                <div className="mt-auto mx-auto max-w-md bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
-                  <div className="flex items-center justify-between">
+                {/* Floating Tag - Absolute positioned outside container to avoid overflow hidden */}
+                <div className="absolute bottom-4 left-6 right-6 bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
+                  <div className="flex items-center justify-between max-w-md mx-auto">
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                       <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-xl lg:text-2xl shadow-lg">
                         🎁
