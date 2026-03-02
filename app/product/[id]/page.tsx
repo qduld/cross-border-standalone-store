@@ -4,9 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ShoppingCart, Heart, Share2, Star, Truck, Shield, Clock } from "lucide-react";
+import { ShoppingCart, Heart, Share2, Star, Truck, Shield, Clock, Check } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCart } from "@/context/CartContext";
 import { useParams } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Mock product data
 const mockProducts: Record<string, any> = {
@@ -319,10 +322,34 @@ function ProductDetailClient({ product }: { product: any }) {
   "use client";
 
   const { language, t } = useLanguage();
+  const { addToCart } = useCart();
+  const router = useRouter();
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [showAddedToCart, setShowAddedToCart] = useState(false);
 
   const displayTitle = language === "zh" ? product.title.zh : product.title.en;
   const displayCategory = language === "zh" ? product.category.zh : product.category.en;
   const displayDescription = language === "zh" ? product.description.zh : product.description.en;
+
+  const handleAddToCart = () => {
+    if (product.stock === 0) return;
+
+    addToCart({
+      id: product.id,
+      title: displayTitle,
+      price: product.price,
+      image: product.images[0],
+    });
+
+    setShowAddedToCart(true);
+    setTimeout(() => setShowAddedToCart(false), 3000);
+  };
+
+  const handleCheckout = () => {
+    handleAddToCart();
+    router.push("/cart");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white dark:bg-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 dark:text-white">
@@ -416,10 +443,19 @@ function ProductDetailClient({ product }: { product: any }) {
                       {product.variants.colors.map((color: any) => (
                         <button
                           key={color.en}
-                          className="px-6 py-3 border-2 border-gray-200 dark:border-gray-500 rounded-xl hover:border-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 font-medium group relative overflow-hidden"
+                          onClick={() => setSelectedColor(color.en)}
+                          className={`px-6 py-3 border-2 rounded-xl transition-all duration-200 font-medium group relative overflow-hidden ${
+                            selectedColor === color.en
+                              ? 'border-red-500 bg-red-50 dark:bg-red-900/20'
+                              : 'border-gray-200 dark:border-gray-500 hover:border-red-500 hover:bg-red-50 dark:hover:bg-red-900/20'
+                          }`}
                         >
-                          <span className="relative z-10 group-hover:text-red-700 transition-colors">{language === "zh" ? color.zh : color.en}</span>
-                          <div className="absolute inset-0 bg-red-100 dark:bg-red-900/30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></div>
+                          <span className={`relative z-10 transition-colors ${
+                            selectedColor === color.en ? 'text-red-700' : ''
+                          }`}>{language === "zh" ? color.zh : color.en}</span>
+                          <div className={`absolute inset-0 bg-red-100 dark:bg-red-900/30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left ${
+                            selectedColor === color.en ? 'scale-x-100' : ''
+                          }`}></div>
                         </button>
                       ))}
                     </div>
@@ -432,10 +468,19 @@ function ProductDetailClient({ product }: { product: any }) {
                       {product.variants.sizes.map((size: any) => (
                         <button
                           key={size.en}
-                          className="px-6 py-3 border-2 border-gray-200 dark:border-gray-500 rounded-xl hover:border-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 font-medium group relative overflow-hidden"
+                          onClick={() => setSelectedSize(size.en)}
+                          className={`px-6 py-3 border-2 rounded-xl transition-all duration-200 font-medium group relative overflow-hidden ${
+                            selectedSize === size.en
+                              ? 'border-red-500 bg-red-50 dark:bg-red-900/20'
+                              : 'border-gray-200 dark:border-gray-500 hover:border-red-500 hover:bg-red-50 dark:hover:bg-red-900/20'
+                          }`}
                         >
-                          <span className="relative z-10 group-hover:text-red-700 transition-colors">{language === "zh" ? size.zh : size.en}</span>
-                          <div className="absolute inset-0 bg-red-100 dark:bg-red-900/30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></div>
+                          <span className={`relative z-10 transition-colors ${
+                            selectedSize === size.en ? 'text-red-700' : ''
+                          }`}>{language === "zh" ? size.zh : size.en}</span>
+                          <div className={`absolute inset-0 bg-red-100 dark:bg-red-900/30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left ${
+                            selectedSize === size.en ? 'scale-x-100' : ''
+                          }`}></div>
                         </button>
                       ))}
                     </div>
@@ -467,19 +512,55 @@ function ProductDetailClient({ product }: { product: any }) {
               <Button
                 size="lg"
                 variant="gradient"
-                className="flex-1 text-lg px-8 py-4"
+                className="flex-1 text-lg px-8 py-4 relative"
                 disabled={product.stock === 0}
+                onClick={handleAddToCart}
               >
-                <ShoppingCart className="mr-3 w-6 h-6" />
-                {t("加入购物车", "Add to Cart")}
+                {showAddedToCart ? (
+                  <>
+                    <Check className="mr-3 w-6 h-6" />
+                    {t("已添加", "Added!")}
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="mr-3 w-6 h-6" />
+                    {t("加入购物车", "Add to Cart")}
+                  </>
+                )}
               </Button>
               <Button size="lg" variant="outline" className="px-6 py-4 rounded-full hover:border-red-500 hover:text-red-700 dark:border-gray-600 dark:text-white transition-colors">
                 <Heart className="w-6 h-6" />
               </Button>
-              <Button size="lg" variant="outline" className="px-6 py-4 rounded-full hover:border-red-500 hover:text-red-700 dark:border-gray-600 dark:text-white transition-colors">
+              <Button
+                size="lg"
+                variant="outline"
+                className="px-6 py-4 rounded-full hover:border-red-500 hover:text-red-700 dark:border-gray-600 dark:text-white transition-colors"
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({
+                      title: displayTitle,
+                      text: displayDescription,
+                      url: window.location.href
+                    }).catch(() => {});
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert(t("链接已复制", "Link copied to clipboard"));
+                  }
+                }}
+              >
                 <Share2 className="w-6 h-6" />
               </Button>
             </div>
+
+            {/* Quick Buy */}
+            <Button
+              size="lg"
+              className="w-full text-lg px-8 py-4 bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100"
+              disabled={product.stock === 0}
+              onClick={handleCheckout}
+            >
+              {t("立即购买", "Buy Now")}
+            </Button>
 
             {/* Benefits */}
             <Card className="bg-gradient-to-br from-red-50 to-orange-50 border-red-200 dark:from-gray-800 dark:to-gray-700 dark:border-gray-600">
