@@ -1,33 +1,45 @@
+"use client"
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Truck, Lock } from "lucide-react";
-
-// Mock order data
-const orderData = {
-  items: [
-    {
-      id: "1",
-      title: "Seashell Hairpin - Ocean Waves",
-      price: 28.00,
-      quantity: 2,
-      image: "/products/12d62135-8563-46a1-9e71-14f55e56b772.jpg",
-    },
-    {
-      id: "5",
-      title: "Pipa Style Hair Clip - Red",
-      price: 35.00,
-      quantity: 1,
-      image: "/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg",
-    },
-  ],
-  subtotal: 91.00,
-  shipping: 0,
-  total: 91.00,
-};
+import { useCart } from "@/context/CartContext";
+import { useState } from "react";
 
 export default function CheckoutPage() {
+  const { cart, cartTotal } = useCart();
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const shipping = cartTotal > 50 ? 0 : 10;
+  const total = cartTotal + shipping;
+
+  const handlePlaceOrder = () => {
+    setIsProcessing(true);
+    // Simulate order processing
+    setTimeout(() => {
+      alert("订单已提交！感谢您的购买。Order submitted! Thank you for your purchase.");
+      setIsProcessing(false);
+    }, 2000);
+  };
+
+  if (cart.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white dark:bg-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 dark:text-white">
+        <Navbar />
+        <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+          <div className="text-6xl mb-4">🛒</div>
+          <h1 className="text-3xl font-bold mb-4">购物车为空</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">请先添加商品到购物车</p>
+          <Button variant="gradient" onClick={() => window.location.href = "/products"}>
+            浏览商品
+          </Button>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white dark:bg-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 dark:text-white">
       <Navbar />
@@ -214,7 +226,7 @@ export default function CheckoutPage() {
 
                   {/* Order Items */}
                   <div className="space-y-3 max-h-64 overflow-y-auto">
-                    {orderData.items.map((item) => (
+                    {cart.map((item) => (
                       <div key={item.id} className="flex gap-3">
                         <div className="w-16 h-16 flex-shrink-0">
                           <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-lg overflow-hidden">
@@ -239,25 +251,42 @@ export default function CheckoutPage() {
                   <div className="border-t pt-4 space-y-3 dark:border-gray-600">
                     <div className="flex justify-between">
                       <span className="text-gray-600 dark:text-gray-400">小计 Subtotal</span>
-                      <span className="font-semibold dark:text-white">${orderData.subtotal.toFixed(2)}</span>
+                      <span className="font-semibold dark:text-white">${cartTotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600 dark:text-gray-400">运费 Shipping</span>
-                      <span className="font-semibold text-green-600 dark:text-green-400">免费 FREE</span>
+                      <span className={`font-semibold ${shipping === 0 ? 'text-green-600 dark:text-green-400' : 'dark:text-white'}`}>
+                        {shipping === 0 ? '免费 FREE' : `$${shipping.toFixed(2)}`}
+                      </span>
                     </div>
                     <div className="border-t pt-3 dark:border-gray-600">
                       <div className="flex justify-between">
                         <span className="text-lg font-bold dark:text-white">总计 Total</span>
                         <span className="text-2xl font-bold bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent dark:text-white dark:bg-none">
-                          ${orderData.total.toFixed(2)}
+                          ${total.toFixed(2)}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <Button size="lg" variant="gradient" className="w-full text-lg py-4">
-                    <Lock className="mr-2 w-5 h-5" />
-                    安全支付 Pay Now
+                  <Button
+                    size="lg"
+                    variant="gradient"
+                    className="w-full text-lg py-4"
+                    onClick={handlePlaceOrder}
+                    disabled={isProcessing}
+                  >
+                    {isProcessing ? (
+                      <>
+                        <Lock className="mr-2 w-5 h-5 animate-spin" />
+                        处理中...
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="mr-2 w-5 h-5" />
+                        安全支付 Pay Now
+                      </>
+                    )}
                   </Button>
 
                   <div className="flex items-center justify-center gap-4 text-sm text-gray-600 dark:text-gray-400">
