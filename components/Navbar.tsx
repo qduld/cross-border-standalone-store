@@ -43,13 +43,13 @@ export default function Navbar() {
               <Link href="/products" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("产品", "Products")}
               </Link>
-              <Link href="/category/seashell" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
+              <Link href="/products?category=Seashell" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("贝壳", "Seashell")}
               </Link>
-              <Link href="/category/chinese" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
+              <Link href="/products?category=Chinese Style" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("中国风", "Chinese")}
               </Link>
-              <Link href="/category/handknit" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
+              <Link href="/products?category=Handknit" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
                 {t("手工", "Handknit")}
               </Link>
               <Link href="/about" className={`${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'} transition font-medium`}>
@@ -157,13 +157,13 @@ export default function Navbar() {
               <Link href="/products" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("产品", "Products")}
               </Link>
-              <Link href="/category/seashell" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
+              <Link href="/products?category=Seashell" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("贝壳", "Seashell")}
               </Link>
-              <Link href="/category/chinese" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
+              <Link href="/products?category=Chinese Style" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("中国风", "Chinese")}
               </Link>
-              <Link href="/category/handknit" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
+              <Link href="/products?category=Handknit" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
                 {t("手工", "Handknit")}
               </Link>
               <Link href="/about" className={`block py-2 ${theme === 'dark' ? 'text-gray-300 hover:text-red-400' : 'text-gray-700 hover:text-red-700'}`}>
