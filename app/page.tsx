@@ -228,8 +228,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Floating Tag - Moved outside product grid area */}
-                <div className="absolute bottom-4 left-6 right-6 max-w-xs mx-auto bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
+                {/* Floating Tag - Positioned below product grid within container */}
+                <div className="mt-4 mx-auto max-w-md bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                       <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-xl lg:text-2xl shadow-lg">
