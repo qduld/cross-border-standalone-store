@@ -168,10 +168,10 @@ export default function Home() {
                 </div>
 
                 {/* Main Product Display */}
-                <div className="relative flex-grow flex flex-col items-center justify-center pb-16">
+                <div className="relative flex-grow flex flex-col items-center justify-center pb-20">
                   {/* Featured Products Grid */}
-                  <div className="relative w-full max-w-lg">
-                    <div className="grid grid-cols-2 gap-3 lg:gap-4">
+                  <div className="relative w-full max-w-lg max-h-full">
+                    <div className="grid grid-cols-2 gap-3 lg:gap-4 h-full">
                       {/* Product 1 - Seashell */}
                       <Link href="/product/1" className="relative bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                         <div className="aspect-square overflow-hidden">
