@@ -147,7 +147,7 @@ export default function Home() {
             </div>
 
             {/* Hero Image - Premium Product Showcase */}
-            <div className="relative pb-20">
+            <div className="relative">
               <div className="relative aspect-[4/3] lg:aspect-square bg-gradient-to-br from-gray-50 dark:from-gray-800 via-red-50/20 dark:via-red-900/20 to-orange-50/30 dark:to-orange-900/30 rounded-3xl p-6 shadow-2xl overflow-hidden flex flex-col">
                 {/* Elegant Background Pattern */}
                 <div className="absolute inset-0 opacity-5">
