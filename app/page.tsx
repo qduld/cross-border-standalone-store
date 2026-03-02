@@ -281,44 +281,54 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {categories.map((category, index) => (
-              <Link
-                key={category.slug}
-                href={`/category/${category.slug}`}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-                style={{
-                  background: `linear-gradient(135deg, ${category.color.split(' ')[0].replace('from-', '')}, ${category.color.split(' ')[1].replace('to-', '')})`,
-                  animationDelay: `${index * 0.2}s`
-                }}
-              >
-                {/* Dark Overlay for Better Contrast */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-black/50 pointer-events-none"></div>
-                
-                {/* Chinese Pattern Background */}
-                <div className={`absolute inset-0 ${chinesePatterns[category.pattern as keyof typeof chinesePatterns]}`}></div>
+            {categories.map((category, index) => {
+              // Map slug to category name for URL
+              const categoryMap: Record<string, string> = {
+                seashell: "Seashell",
+                chinese: "Chinese Style",
+                handknit: "Handknit"
+              };
+              const categoryName = categoryMap[category.slug] || category.slug;
 
-                <div className="relative z-10">
-                  <div className="text-8xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                    {category.icon}
-                  </div>
-                  <h3 className="text-3xl font-bold mb-3 group-hover:text-white/90 transition-colors">
-                    {t(category.name === "seashell" ? "贝壳首饰" : category.name === "chinese" ? "中国风" : "手工编织", 
-                       category.name === "seashell" ? "Seashell Jewelry" : category.name === "chinese" ? "Chinese Style" : "Handknit Items")}
-                  </h3>
-                  <p className="text-white/90 mb-6 font-medium">{t(category.description === "seashell_description" ? "海洋灵感配饰" : 
-                     category.description === "chinese_description" ? "传统中国美学" : "手工毛线创作",
-                     category.description === "seashell_description" ? "Ocean-inspired accessories" :
-                     category.description === "chinese_description" ? "Traditional Chinese aesthetics" : "Handmade wool creations")}</p>
-                  <div className="inline-flex items-center text-sm font-bold group-hover:translate-x-2 transition-transform bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
-                    {t("立即探索", "Explore Now")}
-                    <span className="ml-2">→</span>
-                  </div>
-                </div>
+              return (
+                <Link
+                  key={category.slug}
+                  href={`/products?category=${encodeURIComponent(categoryName)}`}
+                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-br p-8 text-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                  style={{
+                    background: `linear-gradient(135deg, ${category.color.split(' ')[0].replace('from-', '')}, ${category.color.split(' ')[1].replace('to-', '')})`,
+                    animationDelay: `${index * 0.2}s`
+                  }}
+                >
+                  {/* Dark Overlay for Better Contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/30 to-black/50 pointer-events-none"></div>
 
-                {/* Shine Effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </Link>
-            ))}
+                  {/* Chinese Pattern Background */}
+                  <div className={`absolute inset-0 ${chinesePatterns[category.pattern as keyof typeof chinesePatterns]}`}></div>
+
+                  <div className="relative z-10">
+                    <div className="text-8xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                      {category.icon}
+                    </div>
+                    <h3 className="text-3xl font-bold mb-3 group-hover:text-white/90 transition-colors">
+                      {t(category.name === "seashell" ? "贝壳首饰" : category.name === "chinese" ? "中国风" : "手工编织",
+                         category.name === "seashell" ? "Seashell Jewelry" : category.name === "chinese" ? "Chinese Style" : "Handknit Items")}
+                    </h3>
+                    <p className="text-white/90 mb-6 font-medium">{t(category.description === "seashell_description" ? "海洋灵感配饰" :
+                       category.description === "chinese_description" ? "传统中国美学" : "手工毛线创作",
+                       category.description === "seashell_description" ? "Ocean-inspired accessories" :
+                       category.description === "chinese_description" ? "Traditional Chinese aesthetics" : "Handmade wool creations")}</p>
+                    <div className="inline-flex items-center text-sm font-bold group-hover:translate-x-2 transition-transform bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
+                      {t("立即探索", "Explore Now")}
+                      <span className="ml-2">→</span>
+                    </div>
+                  </div>
+
+                  {/* Shine Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

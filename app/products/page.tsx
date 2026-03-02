@@ -135,10 +135,12 @@ export default function ProductsPage({
 
   const filteredProducts = category
     ? allProducts.filter(p => {
-        const catValue = language === 'zh' ? p.category.zh : p.category.en;
-        const catValueLower = language === 'zh' ? p.category.zh.toLowerCase() : p.category.en.toLowerCase();
+        // Always match against English category regardless of language
+        const enCat = p.category.en.toLowerCase();
         const categoryLower = category.toLowerCase();
-        return catValue === category || catValueLower.includes(categoryLower) || p.category.en.toLowerCase().includes(categoryLower);
+
+        // Exact match or partial match
+        return enCat === categoryLower || enCat.includes(categoryLower);
       })
     : allProducts;
 
@@ -169,17 +171,17 @@ export default function ProductsPage({
             </Button>
           </Link>
           <Link href="/products?category=Seashell">
-            <Button variant={category === "Seashell" ? "gradient" : "outline"} size="sm" className="dark:border-gray-600 dark:text-white">
+            <Button variant={decodeURIComponent(category || '') === "Seashell" ? "gradient" : "outline"} size="sm" className="dark:border-gray-600 dark:text-white">
               🐚 {t("贝壳", "Seashell")}
             </Button>
           </Link>
-          <Link href="/products?category=Chinese+Style">
-            <Button variant={category === "Chinese Style" ? "gradient" : "outline"} size="sm" className="dark:border-gray-600 dark:text-white">
+          <Link href="/products?category=Chinese Style">
+            <Button variant={decodeURIComponent(category || '') === "Chinese Style" ? "gradient" : "outline"} size="sm" className="dark:border-gray-600 dark:text-white">
               🎋 {t("中国风", "Chinese Style")}
             </Button>
           </Link>
           <Link href="/products?category=Handknit">
-            <Button variant={category === "Handknit" ? "gradient" : "outline"} size="sm" className="dark:border-gray-600 dark:text-white">
+            <Button variant={decodeURIComponent(category || '') === "Handknit" ? "gradient" : "outline"} size="sm" className="dark:border-gray-600 dark:text-white">
               🧶 {t("手工", "Handknit")}
             </Button>
           </Link>
