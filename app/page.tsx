@@ -168,10 +168,10 @@ export default function Home() {
                 </div>
 
                 {/* Main Product Display */}
-                <div className="relative flex-grow flex flex-col items-center justify-center pb-20">
+                <div className="relative flex-grow flex flex-col items-center justify-center pb-4">
                   {/* Featured Products Grid */}
-                  <div className="relative w-full max-w-lg max-h-full">
-                    <div className="grid grid-cols-2 gap-3 lg:gap-4 h-full">
+                  <div className="relative w-full max-w-lg">
+                    <div className="grid grid-cols-2 gap-3 lg:gap-4">
                       {/* Product 1 - Seashell */}
                       <Link href="/product/1" className="relative bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                         <div className="aspect-square overflow-hidden">
@@ -228,8 +228,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Floating Tag - Positioned below product grid within container */}
-                <div className="mt-4 mx-auto max-w-md bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
+                {/* Floating Tag - Positioned at bottom within container using flex mt-auto */}
+                <div className="mt-auto mx-auto max-w-md bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                       <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-xl lg:text-2xl shadow-lg">
