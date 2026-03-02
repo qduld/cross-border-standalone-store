@@ -83,7 +83,7 @@ export default function Home() {
       <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-20 left-10 text-6xl opacity-10 animate-pulse">🌸</div>
         <div className="absolute top-40 right-20 text-5xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }}>🏮</div>
-        <div className="absolute bottom-40 left-20 text-7xl opacity-10 animate-pulse" style={{ animationDelay: '2s' }}>🎋</div>
+        <div className="absolute top-40 left-1/3 text-7xl opacity-10 animate-pulse" style={{ animationDelay: '2s' }}>🎋</div>
         <div className="absolute bottom-20 right-10 text-5xl opacity-10 animate-pulse" style={{ animationDelay: '1.5s' }}>🐉</div>
       </div>
 
@@ -229,8 +229,8 @@ export default function Home() {
                 </div>
 
                 {/* Floating Tag - Absolute positioned outside container to avoid overflow hidden */}
-                <div className="absolute bottom-4 left-6 right-6 bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
-                  <div className="flex items-center justify-between max-w-md mx-auto">
+                <div className="absolute bottom-4 right-6 lg:right-8 bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
+                  <div className="flex items-center justify-between max-w-md">
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                       <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-xl lg:text-2xl shadow-lg">
                         🎁
