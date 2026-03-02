@@ -148,13 +148,13 @@ export default function Home() {
 
             {/* Hero Image - Premium Product Showcase */}
             <div className="relative">
-              <div className="relative aspect-[4/3] lg:aspect-square bg-gradient-to-br from-gray-50 dark:from-gray-800 via-red-50/20 dark:via-red-900/20 to-orange-50/30 dark:to-orange-900/30 rounded-3xl p-6 shadow-2xl overflow-hidden">
+              <div className="relative aspect-[4/3] lg:aspect-square bg-gradient-to-br from-gray-50 dark:from-gray-800 via-red-50/20 dark:via-red-900/20 to-orange-50/30 dark:to-orange-900/30 rounded-3xl p-6 shadow-2xl overflow-hidden flex flex-col">
                 {/* Elegant Background Pattern */}
                 <div className="absolute inset-0 opacity-5">
                   <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-red-200 to-orange-100 rounded-full blur-3xl"></div>
                   <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-red-200 to-orange-100 rounded-full blur-3xl"></div>
                 </div>
-                
+
                 {/* Geometric Pattern */}
                 <div className="absolute inset-0">
                   <svg className="w-full h-full opacity-5" viewBox="0 0 400 400">
@@ -168,7 +168,7 @@ export default function Home() {
                 </div>
 
                 {/* Main Product Display */}
-                <div className="relative h-full flex flex-col items-center justify-center">
+                <div className="relative flex-grow flex flex-col items-center justify-center pb-16">
                   {/* Featured Products Grid */}
                   <div className="relative w-full max-w-lg">
                     <div className="grid grid-cols-2 gap-3 lg:gap-4">
@@ -187,7 +187,7 @@ export default function Home() {
                       </Link>
 
                       {/* Product 2 - Chinese Style */}
-                      <Link href="/product/5" className="relative bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 lg:mt-6">
+                      <Link href="/product/5" className="relative bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                         <div className="aspect-square overflow-hidden">
                           <img
                             src="/products/583ca2e7-a4f3-4945-9b68-cb18b4d80313.jpg"
@@ -201,7 +201,7 @@ export default function Home() {
                       </Link>
 
                       {/* Product 3 - Handknit */}
-                      <Link href="/product/13" className="relative bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 -lg:mt-4">
+                      <Link href="/product/13" className="relative bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                         <div className="aspect-square overflow-hidden">
                           <img
                             src="/products/c87bc927-beb7-48f1-bf6f-80087967bcde.jpg"
@@ -215,7 +215,7 @@ export default function Home() {
                       </Link>
 
                       {/* Product 4 - Necklace */}
-                      <Link href="/product/2" className="relative bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 lg:mt-2">
+                      <Link href="/product/2" className="relative bg-white dark:bg-gray-700 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                         <div className="aspect-square overflow-hidden">
                           <img
                             src="/products/76992cd5-3fc0-4234-b49e-8cfa198a2c75.jpg"
@@ -228,8 +228,8 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Floating Tag */}
-                <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600">
+                {/* Floating Tag - Moved outside product grid area */}
+                <div className="absolute bottom-4 left-4 right-4 bg-white/95 dark:bg-gray-700/95 backdrop-blur-sm rounded-xl p-3 lg:p-4 shadow-xl border border-red-100 dark:border-gray-600 z-20">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
                       <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-red-600 to-orange-500 rounded-full flex items-center justify-center text-white text-xl lg:text-2xl shadow-lg">
