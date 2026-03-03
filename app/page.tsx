@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
+import SubscribeForm from "@/components/SubscribeForm";
 import { useLanguage } from "@/context/LanguageContext";
 
 // Mock data
@@ -476,16 +477,7 @@ export default function Home() {
           <p className="text-gray-600 dark:text-gray-400 text-lg mb-8">
             {t("订阅获取新品上架、特别优惠和每个产品背后的故事", "Subscribe to get new arrivals, special offers, and stories behind each product")}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder={t("输入您的邮箱", "Enter your email")}
-              className="flex-1 px-6 py-4 rounded-full border-2 border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-500 transition-all duration-200 text-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
-            />
-            <Button variant="gradient" size="lg" className="rounded-full px-8">
-              {t("订阅", "Subscribe")} →
-            </Button>
-          </div>
+          <SubscribeForm className="max-w-md mx-auto" />
         </div>
       </section>
 
