@@ -5,6 +5,8 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 // Mock data with i18n support
 const allProducts = [
@@ -125,21 +127,17 @@ const allProducts = [
   },
 ];
 
-export default function ProductsPage({
-  searchParams,
-}: {
-  searchParams: { category?: string };
-}) {
+function ProductsContent() {
   const { t, language } = useLanguage();
-  const category = searchParams?.category;
+  const searchParams = useSearchParams();
+  const category = searchParams?.get('category');
 
   const filteredProducts = category
     ? allProducts.filter(p => {
-        // Always match against English category regardless of language
         const enCat = p.category.en.toLowerCase();
         const categoryLower = category.toLowerCase();
 
-        // Exact match or partial match
+        // Match against English category
         return enCat === categoryLower || enCat.includes(categoryLower);
       })
     : allProducts;
@@ -240,5 +238,24 @@ export default function ProductsPage({
 
       <Footer />
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white dark:bg-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 dark:text-white">
+        <Navbar />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-red-700 border-t-transparent"></div>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">加载中...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   );
 }
