@@ -3,11 +3,68 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Loader2, CheckCircle, XCircle } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useState } from "react";
 
 export default function ContactPage() {
   const { t } = useLanguage();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitStatus('success');
+        // 清空表单
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        // 3秒后重置状态
+        setTimeout(() => setSubmitStatus('idle'), 3000);
+      } else {
+        setSubmitStatus('error');
+        setErrorMessage(data.error || '提交失败，请稍后重试');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage('网络错误，请稍后重试');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-red-50/30 to-white dark:bg-gray-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 dark:text-white">
@@ -45,15 +102,40 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-red-700 to-orange-500 bg-clip-text text-transparent dark:text-white dark:bg-none">
                 {t("发送消息", "Send Message")}
               </h2>
-              <form className="space-y-6">
+
+              {/* Success Message */}
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+                  <p className="text-green-800 dark:text-green-300">
+                    {t("邮件发送成功！我们会尽快回复您。", "Email sent successfully! We will reply to you soon.")}
+                  </p>
+                </div>
+              )}
+
+              {/* Error Message */}
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl flex items-center gap-3">
+                  <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
+                  <p className="text-red-800 dark:text-red-300">
+                    {errorMessage || t("邮件发送失败，请稍后重试。", "Email sending failed, please try again later.")}
+                  </p>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {t("姓名 Name", "Name")}
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all dark:bg-gray-800 dark:text-white"
                     placeholder={t("请输入您的姓名", "Enter your name")}
+                    required
                   />
                 </div>
                 <div>
@@ -62,8 +144,12 @@ export default function ContactPage() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all dark:bg-gray-800 dark:text-white"
                     placeholder={t("请输入您的邮箱", "Enter your email")}
+                    required
                   />
                 </div>
                 <div>
@@ -72,8 +158,12 @@ export default function ContactPage() {
                   </label>
                   <input
                     type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all dark:bg-gray-800 dark:text-white"
                     placeholder={t("请输入消息主题", "Enter message subject")}
+                    required
                   />
                 </div>
                 <div>
@@ -82,13 +172,32 @@ export default function ContactPage() {
                   </label>
                   <textarea
                     rows={6}
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all resize-none dark:bg-gray-800 dark:text-white"
                     placeholder={t("请输入您的消息内容", "Enter your message content")}
+                    required
                   />
                 </div>
-                <Button size="lg" variant="gradient" className="w-full">
-                  <Send className="mr-2 w-5 h-5" />
-                  {t("发送消息", "Send Message")}
+                <Button
+                  size="lg"
+                  variant="gradient"
+                  className="w-full"
+                  type="submit"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+                      {t("发送中...", "Sending...")}
+                    </>
+                  ) : (
+                    <>
+                      <Send className="mr-2 w-5 h-5" />
+                      {t("发送消息", "Send Message")}
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
@@ -106,7 +215,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{t("邮箱 Email", "Email")}</h3>
-                      <p className="text-gray-600 dark:text-gray-300">support@craftshop.com</p>
+                      <p className="text-gray-600 dark:text-gray-300">wowhandicrafts@franklinzelo.uk</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
